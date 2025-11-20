@@ -768,6 +768,7 @@ body {
     background: #f8f9fa;
     border-radius: 10px;
     border-left: 4px solid #4a6cf7;
+    overflow: hidden;
 }
 
 .video-section h4 {
@@ -793,6 +794,7 @@ body {
     height: 100%;
     border: none;
     border-radius: 8px;
+    background: #000;
 }
 
 .video-section p {

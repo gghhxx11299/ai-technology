@@ -61,7 +61,7 @@ let courseData = {
                         <div class="video-section">
                             <h4>Recommended Video: What is AI?</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/JN2t1a6U84Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/JN2t1a6U84Y?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>This video provides an excellent introduction to AI, explaining how machines can think and learn like humans.</p>
                         </div>
@@ -93,7 +93,7 @@ let courseData = {
                         <div class="video-section">
                             <h4>Recommended Video: History of AI</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/8rBh6JQYm80" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/8rBh6JQYm80?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>This video covers the fascinating history of AI development, from early concepts to modern breakthroughs.</p>
                         </div>
@@ -125,7 +125,7 @@ let courseData = {
                         <div class="video-section">
                             <h4>Recommended Video: AI in Industry</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/0Yie4L0oC0Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/0Yie4L0oC0Q?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>See real-world examples of how AI is being applied across different industries today.</p>
                         </div>
@@ -156,7 +156,7 @@ let courseData = {
                         <div class="video-section">
                             <h4>Recommended Video: Ethics in AI</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/T4K3_8rmXeQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/T4K3_8rmXeQ?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>Explore the ethical considerations and responsibilities in developing AI technologies.</p>
                         </div>
@@ -251,7 +251,7 @@ let courseData = {
                         <div class="video-section">
                             <h4>Recommended Video: Introduction to Machine Learning</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/HcqpanDadyQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/HcqpanDadyQ?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>This video provides a comprehensive introduction to machine learning concepts and applications.</p>
                         </div>
@@ -291,7 +291,7 @@ let courseData = {
                         <div class="video-section">
                             <h4>Recommended Video: Types of Machine Learning</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/5WcZeO4dwLA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/5WcZeO4dwLA?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>Understand the differences between supervised, unsupervised, and reinforcement learning.</p>
                         </div>
@@ -323,7 +323,7 @@ let courseData = {
                         <div class="video-section">
                             <h4>Recommended Video: Common ML Algorithms Explained</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/162rPcGg76c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/162rPcGg76c?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>Visual explanations of the most important machine learning algorithms.</p>
                         </div>
@@ -360,7 +360,7 @@ let courseData = {
                         <div class="video-section">
                             <h4>Recommended Video: Model Evaluation Techniques</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/lGySjH2pY6E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/lGySjH2pY6E?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>Learn how to properly evaluate machine learning models and avoid common pitfalls.</p>
                         </div>
@@ -455,7 +455,7 @@ let courseData = {
                         <div class="video-section">
                             <h4>Recommended Video: Neural Networks Explained</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/aircAruvnKk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/aircAruvnKk?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>Visual introduction to neural networks and how they work, with excellent animations.</p>
                         </div>
@@ -485,7 +485,7 @@ let courseData = {
                         <div class="video-section">
                             <h4>Recommended Video: Deep Learning Architectures</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/IX9M9V7W_5s" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/IX9M9V7W_5s?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>Overview of different deep learning architectures and their applications.</p>
                         </div>
@@ -519,7 +519,7 @@ let courseData = {
                         <div class="video-section">
                             <h4>Recommended Video: Backpropagation Explained</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Ilg3gGewQ1U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Ilg3gGewQ1U?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>Detailed explanation of the backpropagation algorithm used to train neural networks.</p>
                         </div>
@@ -558,7 +558,7 @@ let courseData = {
                         <div class="video-section">
                             <h4>Recommended Video: Future of Deep Learning</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Pb7-6yEpV8Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Pb7-6yEpV8Q?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>Discussion of the future possibilities and challenges in deep learning research.</p>
                         </div>
