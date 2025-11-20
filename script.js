@@ -61,7 +61,7 @@ let courseData = {
                         <div class="video-section">
                             <h4>Recommended Video: What is AI?</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/JN2t1a6U84Y?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/ad79nYk2keg?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>This video provides an excellent introduction to AI, explaining how machines can think and learn like humans.</p>
                         </div>
@@ -93,7 +93,7 @@ let courseData = {
                         <div class="video-section">
                             <h4>Recommended Video: History of AI</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/8rBh6JQYm80?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/yaL5ZMvRRqE?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <p>This video covers the fascinating history of AI development, from early concepts to modern breakthroughs.</p>
                         </div>
@@ -109,25 +109,25 @@ let courseData = {
                     id: 3,
                     title: "AI Applications in Industry",
                     content: `
-                        <h3>AI Applications in Industry</h3>
-                        <p>AI technology is transforming industries by automating processes, providing insights from data, and enhancing user experiences.</p>
-                        <h4>Industry Applications:</h4>
+                        <h3>Branches of AI</h3>
+                        <p>Artificial Intelligence encompasses several specialized areas, each focusing on different aspects of intelligent behavior.</p>
+                        <h4>Main Branches:</h4>
                         <ul>
-                            <li><strong>Healthcare:</strong> Medical diagnosis, drug discovery, personalized treatment</li>
-                            <li><strong>Finance:</strong> Fraud detection, algorithmic trading, risk assessment</li>
-                            <li><strong>Transportation:</strong> Self-driving cars, route optimization, traffic prediction</li>
-                            <li><strong>Retail:</strong> Recommendation systems, inventory management, customer service</li>
-                            <li><strong>Manufacturing:</strong> Quality control, predictive maintenance, supply chain optimization</li>
+                            <li><strong>Machine Learning:</strong> Systems that learn from data without explicit programming</li>
+                            <li><strong>Natural Language Processing:</strong> Enabling computers to understand and process human language</li>
+                            <li><strong>Computer Vision:</strong> Giving computers the ability to interpret and understand visual information</li>
+                            <li><strong>Robotics:</strong> Combining AI with physical machines to perform tasks</li>
+                            <li><strong>Expert Systems:</strong> Knowledge-based systems that mimic human decision-making</li>
                         </ul>
-                        <h4>Future Impact:</h4>
-                        <p>As AI continues to advance, it will play an increasingly important role in addressing global challenges such as climate change, healthcare accessibility, and resource optimization.</p>
+                        <h4>Interconnected Fields:</h4>
+                        <p>These branches often overlap and work together to create more sophisticated AI solutions.</p>
 
                         <div class="video-section">
-                            <h4>Recommended Video: AI in Industry</h4>
+                            <h4>Recommended Video: Branches of AI</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/0Yie4L0oC0Q?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/GlGUTBWaDfc?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
-                            <p>See real-world examples of how AI is being applied across different industries today.</p>
+                            <p>Learn about the different branches and subfields of Artificial Intelligence.</p>
                         </div>
 
                         <div class="reading-material">
@@ -141,24 +141,25 @@ let courseData = {
                     id: 4,
                     title: "AI Ethics and Society",
                     content: `
-                        <h3>AI Ethics and Society</h3>
-                        <p>As AI systems become more powerful and pervasive, ethical considerations become increasingly important. These systems impact employment, privacy, fairness, and human autonomy.</p>
-                        <h4>Key Ethical Issues:</h4>
+                        <h3>Modern AI Applications</h3>
+                        <p>Today's AI technologies are transforming every aspect of our lives, from how we work to how we interact with technology.</p>
+                        <h4>Real-World Applications:</h4>
                         <ul>
-                            <li><strong>Bias and Fairness:</strong> Ensuring AI systems don't perpetuate discrimination</li>
-                            <li><strong>Privacy:</strong> Protecting personal data used by AI systems</li>
-                            <li><strong>Transparency:</strong> Making AI decision-making processes understandable</li>
-                            <li><strong>Accountability:</strong> Determining responsibility for AI system actions</li>
+                            <li><strong>Healthcare:</strong> Medical diagnosis, drug discovery, personalized treatment</li>
+                            <li><strong>Finance:</strong> Fraud detection, algorithmic trading, risk assessment</li>
+                            <li><strong>Transportation:</strong> Self-driving cars, route optimization, traffic prediction</li>
+                            <li><strong>Retail:</strong> Recommendation systems, inventory management, customer service</li>
+                            <li><strong>Manufacturing:</strong> Quality control, predictive maintenance, supply chain optimization</li>
                         </ul>
-                        <h4>Responsible AI Development:</h4>
-                        <p>Developing AI in a responsible way requires collaboration between technologists, ethicists, policymakers, and society to ensure these powerful tools benefit humanity.</p>
+                        <h4>Future Impact:</h4>
+                        <p>Modern AI applications continue to expand, addressing global challenges such as climate change, healthcare accessibility, and resource optimization.</p>
 
                         <div class="video-section">
-                            <h4>Recommended Video: Ethics in AI</h4>
+                            <h4>Recommended Video: Modern Applications</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/T4K3_8rmXeQ?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/CiSaY2xl9V4?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
-                            <p>Explore the ethical considerations and responsibilities in developing AI technologies.</p>
+                            <p>See real-world examples of how AI is being applied across different industries today.</p>
                         </div>
 
                         <div class="reading-material">
@@ -233,27 +234,26 @@ let courseData = {
             lessons: [
                 {
                     id: 1,
-                    title: "What is Machine Learning?",
+                    title: "How the Field Evolves",
                     content: `
-                        <h3>What is Machine Learning?</h3>
-                        <p>Machine Learning (ML) is a subset of AI that focuses on building systems that learn from data without being explicitly programmed. The algorithms learn from historical data and make predictions on new, unseen data.</p>
-                        <p>ML algorithms build a model based on sample data, known as training data, in order to make predictions or decisions without being explicitly programmed to do so.</p>
-                        <h4>Key Components:</h4>
+                        <h3>How the Field Evolves</h3>
+                        <p>The field of Artificial Intelligence and Machine Learning has undergone dramatic changes since its inception, with breakthroughs occurring regularly.</p>
+                        <h4>Key Evolution Points:</h4>
                         <ul>
-                            <li><strong>Training Data:</strong> Historical examples used to teach the model</li>
-                            <li><strong>Features:</strong> Input variables used for prediction</li>
-                            <li><strong>Target Variable:</strong> The outcome the model predicts</li>
-                            <li><strong>Model:</strong> The mathematical representation of the pattern</li>
+                            <li><strong>1950s-60s:</strong> Foundational concepts and early optimism</li>
+                            <li><strong>1970s-80s:</strong> First AI winter and expert systems era</li>
+                            <li><strong>1990s-2000s:</strong> Machine learning growth and statistical approaches</li>
+                            <li><strong>2010s-Present:</strong> Deep learning revolution and widespread adoption</li>
                         </ul>
-                        <h4>ML vs Traditional Programming:</h4>
-                        <p>In traditional programming, we input data and programs to get outputs. In ML, we input data and outputs to get programs (models).</p>
+                        <h4>Current Trends:</h4>
+                        <p>Today's AI landscape is characterized by large language models, generative AI, automated machine learning, and edge AI deployment.</p>
 
                         <div class="video-section">
-                            <h4>Recommended Video: Introduction to Machine Learning</h4>
+                            <h4>Recommended Video: How the Field Evolves</h4>
                             <div class="video-container">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/HcqpanDadyQ?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/3EgYAZxnaP0?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
-                            <p>This video provides a comprehensive introduction to machine learning concepts and applications.</p>
+                            <p>Learn how the field of AI and Machine Learning has evolved over the decades.</p>
                         </div>
 
                         <div class="reading-material">
