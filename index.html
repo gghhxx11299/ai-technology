@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Technologies Course</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h2>AI Technologies</h2>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-page="home">Home</a>
+                <a href="#" class="nav-link" data-page="about">About</a>
+                <a href="#" class="nav-link" data-page="courses">Courses</a>
+                <a href="#" class="nav-link" data-page="student-dashboard" id="dashboard-link" style="display:none;">Dashboard</a>
+                <a href="#" class="nav-link" data-page="admin" id="admin-link" style="display:none;">Admin</a>
+                <button id="auth-btn">Login</button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Master AI Technologies</h1>
+                    <p>Learn the fundamentals and advanced concepts of Artificial Intelligence with our comprehensive course.</p>
+                    <button id="get-started-btn" class="cta-button">Get Started</button>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1677442135722-5f11f0a6b973?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="AI Technology">
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Comprehensive Curriculum</h3>
+                    <p>Covering all major AI concepts from basics to advanced implementations.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Interactive Quizzes</h3>
+                    <p>Test your knowledge with our interactive quiz system.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Certificate of Completion</h3>
+                    <p>Earn a verified certificate upon course completion.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Signup Page -->
+        <section id="signup" class="page">
+            <div class="auth-container">
+                <h2>Join Our Course</h2>
+                <p>Create an account to start learning</p>
+                
+                <form id="signup-form">
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" required>
+                    </div>
+                    <button type="submit" class="cta-button">Sign Up</button>
+                </form>
+
+                <p class="auth-switch">Already have an account? <a href="#" id="show-login">Login</a></p>
+            </div>
+        </section>
+
+        <!-- Login Page -->
+        <section id="login" class="page">
+            <div class="auth-container">
+                <h2>Access Your Account</h2>
+                <p>Login to continue your learning journey</p>
+                
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="cta-button">Login</button>
+                </form>
+
+                <p class="auth-switch">Don't have an account? <a href="#" id="show-signup">Sign Up</a></p>
+            </div>
+        </section>
+
+        <!-- Student Dashboard -->
+        <section id="student-dashboard" class="page">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h2>Learning Dashboard</h2>
+                    <div class="user-info">
+                        <p>Welcome, <span id="user-name">Student</span>!</p>
+                        <button id="logout-btn">Logout</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-content">
+                    <div class="progress-overview">
+                        <h3>Your Progress</h3>
+                        <div class="progress-bar">
+                            <div id="overall-progress" class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p id="progress-text">0% Complete</p>
+                    </div>
+
+                    <div class="course-modules">
+                        <h3>Course Modules</h3>
+                        <div id="modules-container">
+                            <!-- Modules will be loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Detail View -->
+        <section id="module-detail" class="page">
+            <div class="container">
+                <div class="module-header">
+                    <a href="#" id="back-to-dashboard" class="back-btn">&larr; Back to Dashboard</a>
+                    <h2 id="module-title">Module Title</h2>
+                    <div class="module-progress">
+                        <span id="module-progress-text">0% Complete</span>
+                    </div>
+                </div>
+
+                <div class="module-content">
+                    <div id="lesson-content">
+                        <!-- Lesson content will be loaded here -->
+                    </div>
+
+                    <div id="quiz-section" style="display:none;">
+                        <!-- Quiz content will be loaded here -->
+                    </div>
+
+                    <div class="module-navigation">
+                        <button id="prev-lesson" class="nav-btn">Previous</button>
+                        <button id="next-lesson" class="nav-btn">Next</button>
+                        <button id="complete-lesson" class="cta-button">Complete Lesson</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificate View -->
+        <section id="certificate" class="page">
+            <div class="container">
+                <div class="certificate-container">
+                    <div class="certificate-body">
+                        <h1>Certificate of Completion</h1>
+                        <p>This is to certify that</p>
+                        <h2 id="certificate-name">Student Name</h2>
+                        <p>has successfully completed the</p>
+                        <h3>AI Technologies Course</h3>
+                        <p>on <span id="completion-date"></span></p>
+                        <div class="certificate-footer">
+                            <div class="signature">Course Instructor</div>
+                            <div class="certificate-id">Certificate ID: <span id="certificate-id"></span></div>
+                        </div>
+                    </div>
+                    <button id="download-certificate" class="cta-button">Download Certificate</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Dashboard -->
+        <section id="admin" class="page">
+            <div class="container">
+                <div class="admin-header">
+                    <h2>Admin Dashboard</h2>
+                    <div class="user-info">
+                        <p>Admin Panel</p>
+                        <button id="admin-logout-btn">Logout</button>
+                    </div>
+                </div>
+
+                <div class="admin-content">
+                    <div class="admin-tabs">
+                        <button class="tab-btn active" data-tab="stats">Statistics</button>
+                        <button class="tab-btn" data-tab="content">Content Management</button>
+                        <button class="tab-btn" data-tab="users">User Management</button>
+                    </div>
+
+                    <div class="tab-content">
+                        <!-- Statistics Tab -->
+                        <div id="stats-tab" class="tab-pane active">
+                            <h3>Course Statistics</h3>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <h4>Total Students</h4>
+                                    <p id="total-students">0</p>
+                                </div>
+                                <div class="stat-card">
+                                    <h4>Completion Rate</h4>
+                                    <p id="completion-rate">0%</p>
+                                </div>
+                                <div class="stat-card">
+                                    <h4>Average Progress</h4>
+                                    <p id="average-progress">0%</p>
+                                </div>
+                            </div>
+
+                            <div class="admin-section">
+                                <h3>Recent Activity</h3>
+                                <div id="recent-activity">
+                                    <!-- Recent activity will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Management Tab -->
+                        <div id="content-tab" class="tab-pane">
+                            <h3>Manage Course Content</h3>
+                            <button id="add-module-btn" class="cta-button">Add New Module</button>
+
+                            <div id="modules-editor">
+                                <!-- Modules will be listed here for editing -->
+                            </div>
+                        </div>
+
+                        <!-- User Management Tab -->
+                        <div id="users-tab" class="tab-pane">
+                            <h3>Manage Students</h3>
+                            <div id="users-list">
+                                <!-- Users will be listed here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 AI Technologies Course. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
