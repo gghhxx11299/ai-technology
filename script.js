@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up navigation
     setupNavigation();
 
+    // Set up mobile menu
+    setupMobileMenu();
+
     // Set up authentication
     setupAuthentication();
 
@@ -1961,6 +1964,42 @@ function setupNavigation() {
     document.getElementById('get-started-btn')?.addEventListener('click', function() {
         showPage('signup');
     });
+}
+
+// Setup mobile menu
+function setupMobileMenu() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+
+            // Animate hamburger bars
+            const bars = hamburger.querySelectorAll('.bar');
+            bars.forEach(bar => bar.classList.toggle('active'));
+        });
+
+        // Close menu when clicking on a nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+
+                // Reset hamburger bars
+                const bars = hamburger.querySelectorAll('.bar');
+                bars.forEach(bar => bar.classList.remove('active'));
+            });
+        });
+
+        // Close menu when clicking on auth button
+        document.getElementById('auth-btn')?.addEventListener('click', function() {
+            navMenu.classList.remove('active');
+
+            // Reset hamburger bars
+            const bars = hamburger.querySelectorAll('.bar');
+            bars.forEach(bar => bar.classList.remove('active'));
+        });
+    }
 }
 
 // Show specific page

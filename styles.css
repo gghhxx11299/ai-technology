@@ -130,6 +130,71 @@ body {
     background: rgba(255, 255, 255, 0.1);
 }
 
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 0.25rem;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.bar.active:nth-child(2) {
+    opacity: 0;
+}
+
+.bar.active:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.bar.active:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: rgba(74, 108, 247, 0.95);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        padding: 2rem 0;
+        z-index: 1001;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu .nav-link {
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .nav-menu .nav-btn {
+        margin: 1rem auto;
+        width: 80%;
+        max-width: 200px;
+    }
+}
+
 /* Main Content */
 .page {
     display: none;
@@ -1106,6 +1171,29 @@ body {
     margin: 0;
 }
 
+/* Responsive embed */
+.embed-responsive {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 0;
+    padding: 0;
+}
+
+.embed-responsive-16by9 {
+    padding-bottom: 56.25%;
+}
+
+.embed-responsive-item {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
 /* Reading material styling */
 .reading-material {
     margin: 2rem 0;
@@ -1912,7 +2000,11 @@ footer {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+    .nav-container {
+        padding: 1rem;
+    }
+
     .hero {
         flex-direction: column;
         text-align: center;
@@ -1920,19 +2012,120 @@ footer {
     }
 
     .hero-content {
-        padding-right: 0;
+        padding: 2rem;
         margin-bottom: 2rem;
+    }
+
+    .hero-image {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .stats {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .module-content {
+        grid-template-columns: 1fr;
+    }
+
+    .module-info {
+        margin: 1rem 0;
+    }
+
+    .admin-header, .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .logo {
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 1rem 0;
+    }
+
+    .nav-link {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+
+    .hero-content {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
     }
 
     .hero-buttons {
         flex-direction: column;
     }
 
-    .nav-links {
-        display: none;
+    .hero-image {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .hero-image img {
+        width: 100%;
+        height: auto;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+
+    .stats {
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .stat {
+        width: 100%;
+    }
+
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .courses-grid {
+        grid-template-columns: 1fr;
     }
 
     .progress-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-cards {
         grid-template-columns: 1fr;
     }
 
@@ -1944,35 +2137,227 @@ footer {
         margin: 1rem 0;
     }
 
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .stat-cards {
-        grid-template-columns: 1fr;
-    }
-
-    .testimonial-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .courses-grid {
-        grid-template-columns: 1fr;
-    }
-
     .admin-header, .dashboard-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
     }
 
-    .stats {
-        flex-direction: column;
-        gap: 1rem;
+    .stats-grid {
+        grid-template-columns: 1fr;
     }
 
     .auth-container {
         margin: 2rem 1rem;
         padding: 1.5rem;
+        width: auto;
+    }
+
+    .auth-header i {
+        font-size: 2.5rem;
+    }
+
+    .auth-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .input-group input {
+        font-size: 0.9rem;
+    }
+
+    .module-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .lesson-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .activity-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .activity-item i {
+        margin-top: 0;
+    }
+
+    .module-navigation {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .user-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .module-outline {
+        margin-top: 1rem;
+    }
+
+    .certificate-body {
+        padding: 2rem;
+    }
+
+    .certificate-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .certificate-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .video-container {
+        padding-top: 56.25%;
+    }
+
+    .video-section, .reading-material, .practice-exercise, .code-example, .assignment-section, .project-section {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0.8rem 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.7rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+
+    .hero-buttons {
+        gap: 0.8rem;
+    }
+
+    .cta-button {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+        width: 100%;
+    }
+
+    .features {
+        gap: 1.5rem;
+    }
+
+    .feature-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .testimonials {
+        margin: 4rem 0;
+        padding: 0 1rem;
+    }
+
+    .testimonial-card {
+        padding: 1.5rem;
+    }
+
+    .stat h3 {
+        font-size: 1.6rem;
+    }
+
+    .stat p {
+        font-size: 0.8rem;
+    }
+
+    .progress-card {
+        padding: 1.5rem;
+    }
+
+    .stat-card {
+        padding: 1.3rem 1rem;
+    }
+
+    .module-card {
+        margin-bottom: 1rem;
+    }
+
+    .module-header {
+        padding: 1rem;
+    }
+
+    .lesson-item {
+        padding: 0.8rem 1rem;
+    }
+
+    .activity-item {
+        padding: 0.8rem 0;
+    }
+
+    .module-main {
+        padding: 1.5rem;
+    }
+
+    .lesson-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .quiz-question {
+        padding: 1rem;
+    }
+
+    .certificate-body {
+        padding: 1.5rem;
+    }
+
+    .certificate-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .certificate-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .admin-section {
+        padding: 1.5rem;
+    }
+
+    .tab-btn {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .course-info {
+        padding: 1rem;
+    }
+
+    .course-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-column {
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .video-container iframe {
+        width: 100%;
+        height: 100%;
     }
 }
