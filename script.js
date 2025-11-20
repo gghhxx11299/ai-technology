@@ -57,6 +57,19 @@ let courseData = {
                         </ul>
                         <h4>Applications:</h4>
                         <p>AI is applied across numerous fields including healthcare, finance, transportation, and entertainment to solve complex problems and automate tasks.</p>
+
+                        <div class="video-section">
+                            <h4>Recommended Video: What is AI?</h4>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/JN2t1a6U84Y" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>This video provides an excellent introduction to AI, explaining how machines can think and learn like humans.</p>
+                        </div>
+
+                        <div class="reading-material">
+                            <h4>Recommended Reading</h4>
+                            <p>For a deeper understanding of AI concepts, read about the Turing Test and how it defines machine intelligence. The test, proposed by Alan Turing in 1950, evaluates a machine's ability to exhibit intelligent behavior equivalent to, or indistinguishable from, that of a human.</p>
+                        </div>
                     `,
                     completed: false
                 },
@@ -76,6 +89,19 @@ let courseData = {
                         </ol>
                         <h4>Modern Developments:</h4>
                         <p>Today's AI systems can recognize speech, images, and text with remarkable accuracy, play complex games at superhuman levels, and assist in scientific research across multiple domains.</p>
+
+                        <div class="video-section">
+                            <h4>Recommended Video: History of AI</h4>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/8rBh6JQYm80" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>This video covers the fascinating history of AI development, from early concepts to modern breakthroughs.</p>
+                        </div>
+
+                        <div class="reading-material">
+                            <h4>Historical Context</h4>
+                            <p>The Dartmouth Conference of 1956 is often cited as the birth of AI as a field. The proposal for the conference stated: "Every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it."</p>
+                        </div>
                     `,
                     completed: false
                 },
@@ -95,6 +121,19 @@ let courseData = {
                         </ul>
                         <h4>Future Impact:</h4>
                         <p>As AI continues to advance, it will play an increasingly important role in addressing global challenges such as climate change, healthcare accessibility, and resource optimization.</p>
+
+                        <div class="video-section">
+                            <h4>Recommended Video: AI in Industry</h4>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/0Yie4L0oC0Q" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>See real-world examples of how AI is being applied across different industries today.</p>
+                        </div>
+
+                        <div class="reading-material">
+                            <h4>Case Study: AI in Healthcare</h4>
+                            <p>Google's DeepMind has developed AI systems that can diagnose eye diseases as accurately as world-leading experts. This system processes optical coherence tomography scans to detect over 50 eye diseases with 94% accuracy.</p>
+                        </div>
                     `,
                     completed: false
                 },
@@ -113,6 +152,19 @@ let courseData = {
                         </ul>
                         <h4>Responsible AI Development:</h4>
                         <p>Developing AI in a responsible way requires collaboration between technologists, ethicists, policymakers, and society to ensure these powerful tools benefit humanity.</p>
+
+                        <div class="video-section">
+                            <h4>Recommended Video: Ethics in AI</h4>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/T4K3_8rmXeQ" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Explore the ethical considerations and responsibilities in developing AI technologies.</p>
+                        </div>
+
+                        <div class="reading-material">
+                            <h4>Ethical Frameworks</h4>
+                            <p>Organizations like the Partnership on AI and IEEE are developing ethical frameworks to guide the development of responsible AI systems. Principles include fairness, accountability, and transparency.</p>
+                        </div>
                     `,
                     completed: false
                 }
@@ -142,6 +194,30 @@ let courseData = {
                         options: ["Speed of computation", "Energy consumption", "Bias and fairness", "Hardware cost"],
                         correct: 2,
                         explanation: "Ensuring AI systems are fair and don't perpetuate discrimination is a major ethical concern in AI development."
+                    },
+                    {
+                        question: "True or False: The Dartmouth Conference of 1956 is considered the birth of AI as a field.",
+                        options: ["True", "False"],
+                        correct: 0,
+                        explanation: "The Dartmouth Conference of 1956 is widely recognized as the birth of AI as a field of study."
+                    },
+                    {
+                        question: "What was significant about Google's DeepMind in healthcare?",
+                        options: ["Created the first medical AI", "Diagnosed eye diseases with 94% accuracy", "Developed new drugs", "Improved surgery robots"],
+                        correct: 1,
+                        explanation: "Google's DeepMind developed AI that can diagnose over 50 eye diseases with 94% accuracy from OCT scans."
+                    },
+                    {
+                        question: "Personal Reflection: How do you think AI will impact your chosen career field?",
+                        options: ["Will replace many jobs", "Will create new opportunities", "Will require new skills", "All of the above"],
+                        correct: "any", // This indicates there's no wrong answer
+                        explanation: "This is a personal reflection question about your perspective on AI's impact on your career."
+                    },
+                    {
+                        question: "True or False: Ethics in AI primarily concerns the speed of computation.",
+                        options: ["True", "False"],
+                        correct: 1,
+                        explanation: "AI ethics focuses on fairness, privacy, transparency, and accountability, not computational speed."
                     }
                 ],
                 completed: false,
@@ -171,6 +247,19 @@ let courseData = {
                         </ul>
                         <h4>ML vs Traditional Programming:</h4>
                         <p>In traditional programming, we input data and programs to get outputs. In ML, we input data and outputs to get programs (models).</p>
+
+                        <div class="video-section">
+                            <h4>Recommended Video: Introduction to Machine Learning</h4>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/HcqpanDadyQ" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>This video provides a comprehensive introduction to machine learning concepts and applications.</p>
+                        </div>
+
+                        <div class="reading-material">
+                            <h4>Historical Context</h4>
+                            <p>Arthur Samuel, a pioneer in the field, coined the term "Machine Learning" in 1959. He defined it as "the field of study that gives computers the ability to learn without being explicitly programmed."</p>
+                        </div>
                     `,
                     completed: false
                 },
@@ -198,6 +287,19 @@ let courseData = {
                             <li>Interacts with environment</li>
                             <li>Examples: Game playing, Robotics, Recommendation systems</li>
                         </ul>
+
+                        <div class="video-section">
+                            <h4>Recommended Video: Types of Machine Learning</h4>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/5WcZeO4dwLA" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Understand the differences between supervised, unsupervised, and reinforcement learning.</p>
+                        </div>
+
+                        <div class="reading-material">
+                            <h4>Real-World Examples</h4>
+                            <p>Netflix uses supervised learning to predict what movies you might enjoy based on your viewing history. Google uses unsupervised learning to group similar search results. Game-playing AIs like AlphaGo use reinforcement learning to improve their gameplay through trial and error.</p>
+                        </div>
                     `,
                     completed: false
                 },
@@ -217,6 +319,19 @@ let courseData = {
                         <p>Groups similar data points together. Used for market segmentation, image compression.</p>
                         <h4>Neural Networks:</h4>
                         <p>Computational models inspired by biological neural networks. Foundation of deep learning.</p>
+
+                        <div class="video-section">
+                            <h4>Recommended Video: Common ML Algorithms Explained</h4>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/162rPcGg76c" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Visual explanations of the most important machine learning algorithms.</p>
+                        </div>
+
+                        <div class="reading-material">
+                            <h4>Algorithm Selection</h4>
+                            <p>The choice of algorithm depends on several factors: the size of the dataset, the type of data, the business requirements, and interpretability needs. Linear regression is simple and interpretable, while neural networks can model complex relationships but are harder to interpret.</p>
+                        </div>
                     `,
                     completed: false
                 },
@@ -241,6 +356,19 @@ let courseData = {
                         </ul>
                         <h4>Overfitting and Underfitting:</h4>
                         <p>Overfitting occurs when a model learns too much from training data and fails to generalize. Underfitting occurs when a model is too simple to capture the underlying pattern.</p>
+
+                        <div class="video-section">
+                            <h4>Recommended Video: Model Evaluation Techniques</h4>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/lGySjH2pY6E" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Learn how to properly evaluate machine learning models and avoid common pitfalls.</p>
+                        </div>
+
+                        <div class="reading-material">
+                            <h4>Cross-Validation</h4>
+                            <p>Cross-validation is a technique to evaluate model performance by splitting data into multiple training and validation sets. K-fold cross-validation is a popular approach where the data is divided into k subsets, and the model is trained and validated k times, each time using a different subset as the validation set.</p>
+                        </div>
                     `,
                     completed: false
                 }
@@ -264,6 +392,36 @@ let courseData = {
                         options: ["Model is too simple", "Model learns too much from training data", "Model has no training data", "Model is too fast"],
                         correct: 1,
                         explanation: "Overfitting occurs when a model learns the training data too well, including noise and outliers, and fails to generalize to new data."
+                    },
+                    {
+                        question: "True or False: In traditional programming, we input data and outputs to get programs.",
+                        options: ["True", "False"],
+                        correct: 1,
+                        explanation: "In traditional programming, we input data and programs to get outputs. In ML, we input data and outputs to get programs (models)."
+                    },
+                    {
+                        question: "Which algorithm would be best for grouping customers with similar purchasing habits?",
+                        options: ["Linear Regression", "Logistic Regression", "K-Means Clustering", "Decision Tree"],
+                        correct: 2,
+                        explanation: "K-Means Clustering is used for grouping similar data points together without labels."
+                    },
+                    {
+                        question: "Personal Reflection: How might machine learning impact your daily life in the next 5 years?",
+                        options: ["More personalized recommendations", "Improved healthcare", "Increased automation", "All of the above"],
+                        correct: "any",
+                        explanation: "This is a personal reflection question about how ML might affect your life."
+                    },
+                    {
+                        question: "What does the R² Score measure in regression?",
+                        options: ["Error rate", "Variance explained by the model", "Prediction accuracy", "Processing speed"],
+                        correct: 1,
+                        explanation: "R² Score measures the proportion of variance in the target variable that is explained by the model."
+                    },
+                    {
+                        question: "True or False: Cross-validation helps prevent overfitting.",
+                        options: ["True", "False"],
+                        correct: 0,
+                        explanation: "Cross-validation helps evaluate model performance and can indicate if a model is overfitting to the training data."
                     }
                 ],
                 completed: false,
@@ -293,6 +451,19 @@ let courseData = {
                         <p>Neural networks learn by adjusting connection weights through a process called backpropagation, minimizing the difference between predicted and actual outputs.</p>
                         <h4>Activation Functions:</h4>
                         <p>Functions that determine whether a neuron should be activated. Common ones include ReLU, Sigmoid, and Tanh.</p>
+
+                        <div class="video-section">
+                            <h4>Recommended Video: Neural Networks Explained</h4>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/aircAruvnKk" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Visual introduction to neural networks and how they work, with excellent animations.</p>
+                        </div>
+
+                        <div class="reading-material">
+                            <h4>Biological Inspiration</h4>
+                            <p>The concept of artificial neural networks was inspired by the structure and function of biological neurons in the brain. A biological neuron receives signals through dendrites, processes them in the cell body, and transmits them through the axon to other neurons.</p>
+                        </div>
                     `,
                     completed: false
                 },
@@ -310,6 +481,19 @@ let courseData = {
                         <p>A special type of RNN that can learn long-term dependencies. Addresses the vanishing gradient problem in traditional RNNs.</p>
                         <h4>Transformers:</h4>
                         <p>Architecture based on attention mechanisms, particularly successful in natural language processing tasks.</p>
+
+                        <div class="video-section">
+                            <h4>Recommended Video: Deep Learning Architectures</h4>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/IX9M9V7W_5s" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Overview of different deep learning architectures and their applications.</p>
+                        </div>
+
+                        <div class="reading-material">
+                            <h4>Real-World Applications</h4>
+                            <p>CNNs power image recognition systems like those used by Google Photos and Facebook. RNNs and LSTMs are used in language modeling and speech recognition. Transformers power models like GPT and BERT for natural language processing.</p>
+                        </div>
                     `,
                     completed: false
                 },
@@ -331,6 +515,19 @@ let courseData = {
                         </ul>
                         <h4>Hyperparameter Tuning:</h4>
                         <p>Adjusting parameters like learning rate, batch size, and network architecture to optimize performance.</p>
+
+                        <div class="video-section">
+                            <h4>Recommended Video: Backpropagation Explained</h4>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Ilg3gGewQ1U" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Detailed explanation of the backpropagation algorithm used to train neural networks.</p>
+                        </div>
+
+                        <div class="reading-material">
+                            <h4>Training Challenges</h4>
+                            <p>Training deep networks requires significant computational resources and can be sensitive to hyperparameter choices. Techniques like batch normalization and residual connections have helped make deeper networks more trainable.</p>
+                        </div>
                     `,
                     completed: false
                 },
@@ -357,6 +554,19 @@ let courseData = {
                         </ul>
                         <h4>Challenges:</h4>
                         <p>Despite successes, deep learning faces challenges including data requirements, interpretability, and robustness to adversarial examples.</p>
+
+                        <div class="video-section">
+                            <h4>Recommended Video: Future of Deep Learning</h4>
+                            <div class="video-container">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/Pb7-6yEpV8Q" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <p>Discussion of the future possibilities and challenges in deep learning research.</p>
+                        </div>
+
+                        <div class="reading-material">
+                            <h4>Ethical Considerations</h4>
+                            <p>As deep learning systems become more pervasive, considerations around bias, privacy, and fairness become increasingly important. Researchers are working on developing more robust and interpretable models.</p>
+                        </div>
                     `,
                     completed: false
                 }
@@ -380,6 +590,36 @@ let courseData = {
                         options: ["Faster training", "Better handling of long-term dependencies", "Less memory usage", "Simpler architecture"],
                         correct: 1,
                         explanation: "Long Short-Term Memory (LSTM) networks address the vanishing gradient problem in traditional RNNs and are better at handling long-term dependencies."
+                    },
+                    {
+                        question: "True or False: The backpropagation algorithm propagates error gradients from the output layer back to the input layer.",
+                        options: ["True", "False"],
+                        correct: 0,
+                        explanation: "Backpropagation calculates gradients by propagating the error backwards from the output layer to the input layer."
+                    },
+                    {
+                        question: "Which architecture is particularly effective for image recognition?",
+                        options: ["RNN", "LSTM", "CNN", "Transformer"],
+                        correct: 2,
+                        explanation: "CNNs (Convolutional Neural Networks) are specialized for processing grid-like data such as images."
+                    },
+                    {
+                        question: "Personal Reflection: How comfortable do you feel about the pace of advancement in AI technologies?",
+                        options: ["Excited and optimistic", "Cautious but hopeful", "Concerned about implications", "All of the above are valid"],
+                        correct: "any",
+                        explanation: "This is a personal reflection on your feelings about AI advancement."
+                    },
+                    {
+                        question: "What does dropout regularization do?",
+                        options: ["Makes the network faster", "Reduces overfitting by randomly setting neurons to zero", "Increases network capacity", "Improves accuracy"],
+                        correct: 1,
+                        explanation: "Dropout randomly sets some neurons to zero during training to prevent overfitting."
+                    },
+                    {
+                        question: "True or False: Transformers have been very successful in natural language processing tasks.",
+                        options: ["True", "False"],
+                        correct: 0,
+                        explanation: "Transformers have powered breakthrough models like GPT and BERT in natural language processing."
                     }
                 ],
                 completed: false,
@@ -1275,7 +1515,7 @@ function submitQuiz(module) {
     // Grade quiz
     let correctCount = 0;
     module.quiz.questions.forEach((question, index) => {
-        if (answers[index] === question.correct) {
+        if (question.correct === "any" || answers[index] === question.correct) {
             correctCount++;
         }
     });
