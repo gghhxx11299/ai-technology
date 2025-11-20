@@ -1,7 +1,6 @@
-// AI Technologies Course Website - JavaScript
+// AI Mastery Academy - Enhanced Course Website
 // Data storage using localStorage
 const DATA_KEY = 'aiCourseData';
-const ADMIN_KEY = 'aiCourseAdmin';
 
 // Initialize application
 document.addEventListener('DOMContentLoaded', function() {
@@ -26,6 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up certificate view
     setupCertificateView();
     
+    // Set up courses page
+    setupCoursesPage();
+    
     // Check current authentication status
     checkAuthStatus();
 });
@@ -36,42 +38,81 @@ let courseData = {
         {
             id: 1,
             title: "Introduction to AI",
-            description: "Learn the basics of Artificial Intelligence and its applications",
+            description: "Learn the fundamentals of Artificial Intelligence and its applications",
+            duration: "2 weeks",
             lessons: [
                 {
                     id: 1,
-                    title: "What is AI?",
+                    title: "What is Artificial Intelligence?",
                     content: `
                         <h3>What is Artificial Intelligence?</h3>
                         <p>Artificial Intelligence (AI) is intelligence demonstrated by machines, in contrast to the natural intelligence displayed by humans and animals. Leading AI textbooks define the field as the study of "intelligent agents": any device that perceives its environment and takes actions that maximize its chance of successfully achieving its goals.</p>
                         <p>AI research has been defined as the field of study of intelligent agents, which refers to any system that learns how to recognize its environment and takes actions that maximize its chance of success.</p>
+                        <h4>Key Concepts:</h4>
+                        <ul>
+                            <li>Perception and reasoning</li>
+                            <li>Learning from experience</li>
+                            <li>Problem solving and decision making</li>
+                            <li>Adaptation to new situations</li>
+                        </ul>
+                        <h4>Applications:</h4>
+                        <p>AI is applied across numerous fields including healthcare, finance, transportation, and entertainment to solve complex problems and automate tasks.</p>
                     `,
                     completed: false
                 },
                 {
                     id: 2,
-                    title: "History of AI",
+                    title: "History and Evolution of AI",
                     content: `
-                        <h3>History of Artificial Intelligence</h3>
+                        <h3>History and Evolution of AI</h3>
                         <p>The field of AI research was born at a Dartmouth College workshop in 1956. Attendees Allen Newell, Herbert Simon, John McCarthy, Marvin Minsky and Arthur Samuel became the founders and key contributors to the field.</p>
-                        <p>Early AI research in the 1950s explored topics like problem solving and symbolic methods. In the 1960s, the US Department of Defense took interest in this work and began funding projects such as early speech recognition systems.</p>
+                        <h4>Key Milestones:</h4>
+                        <ol>
+                            <li><strong>1950s:</strong> Birth of AI research</li>
+                            <li><strong>1960s-70s:</strong> Early optimism and the first AI "winter"</li>
+                            <li><strong>1980s:</strong> Expert systems and revival</li>
+                            <li><strong>1990s-2000s:</strong> Machine learning growth</li>
+                            <li><strong>2010s-Present:</strong> Deep learning revolution</li>
+                        </ol>
+                        <h4>Modern Developments:</h4>
+                        <p>Today's AI systems can recognize speech, images, and text with remarkable accuracy, play complex games at superhuman levels, and assist in scientific research across multiple domains.</p>
                     `,
                     completed: false
                 },
                 {
                     id: 3,
-                    title: "AI Applications",
+                    title: "AI Applications in Industry",
                     content: `
-                        <h3>Applications of AI</h3>
-                        <p>AI is used in a wide range of applications today:</p>
+                        <h3>AI Applications in Industry</h3>
+                        <p>AI technology is transforming industries by automating processes, providing insights from data, and enhancing user experiences.</p>
+                        <h4>Industry Applications:</h4>
                         <ul>
-                            <li>Natural Language Processing</li>
-                            <li>Computer Vision</li>
-                            <li>Robotics</li>
-                            <li>Expert Systems</li>
-                            <li>Game Playing</li>
-                            <li>Pattern Recognition</li>
+                            <li><strong>Healthcare:</strong> Medical diagnosis, drug discovery, personalized treatment</li>
+                            <li><strong>Finance:</strong> Fraud detection, algorithmic trading, risk assessment</li>
+                            <li><strong>Transportation:</strong> Self-driving cars, route optimization, traffic prediction</li>
+                            <li><strong>Retail:</strong> Recommendation systems, inventory management, customer service</li>
+                            <li><strong>Manufacturing:</strong> Quality control, predictive maintenance, supply chain optimization</li>
                         </ul>
+                        <h4>Future Impact:</h4>
+                        <p>As AI continues to advance, it will play an increasingly important role in addressing global challenges such as climate change, healthcare accessibility, and resource optimization.</p>
+                    `,
+                    completed: false
+                },
+                {
+                    id: 4,
+                    title: "AI Ethics and Society",
+                    content: `
+                        <h3>AI Ethics and Society</h3>
+                        <p>As AI systems become more powerful and pervasive, ethical considerations become increasingly important. These systems impact employment, privacy, fairness, and human autonomy.</p>
+                        <h4>Key Ethical Issues:</h4>
+                        <ul>
+                            <li><strong>Bias and Fairness:</strong> Ensuring AI systems don't perpetuate discrimination</li>
+                            <li><strong>Privacy:</strong> Protecting personal data used by AI systems</li>
+                            <li><strong>Transparency:</strong> Making AI decision-making processes understandable</li>
+                            <li><strong>Accountability:</strong> Determining responsibility for AI system actions</li>
+                        </ul>
+                        <h4>Responsible AI Development:</h4>
+                        <p>Developing AI in a responsible way requires collaboration between technologists, ethicists, policymakers, and society to ensure these powerful tools benefit humanity.</p>
                     `,
                     completed: false
                 }
@@ -81,27 +122,38 @@ let courseData = {
                     {
                         question: "What does AI stand for?",
                         options: ["Automatic Intelligence", "Artificial Intelligence", "Advanced Interface", "Automated Internet"],
-                        correct: 1
+                        correct: 1,
+                        explanation: "AI stands for Artificial Intelligence, which refers to systems that perform tasks typically requiring human intelligence."
                     },
                     {
-                        question: "When was the field of AI research born?",
+                        question: "When was the field of AI research formally born?",
                         options: ["1946", "1956", "1966", "1976"],
-                        correct: 1
+                        correct: 1,
+                        explanation: "The Dartmouth College workshop in 1956 is commonly considered the birth of AI research as an academic discipline."
                     },
                     {
                         question: "Which of the following is NOT a common AI application?",
                         options: ["Natural Language Processing", "Computer Vision", "Data Storage", "Robotics"],
-                        correct: 2
+                        correct: 2,
+                        explanation: "While AI systems often process stored data, data storage itself is not an AI application."
+                    },
+                    {
+                        question: "What is a key ethical concern regarding AI systems?",
+                        options: ["Speed of computation", "Energy consumption", "Bias and fairness", "Hardware cost"],
+                        correct: 2,
+                        explanation: "Ensuring AI systems are fair and don't perpetuate discrimination is a major ethical concern in AI development."
                     }
                 ],
-                completed: false
+                completed: false,
+                score: 0
             },
             completed: false
         },
         {
             id: 2,
             title: "Machine Learning Fundamentals",
-            description: "Understanding the core concepts of Machine Learning",
+            description: "Understanding the core concepts of Machine Learning and its applications",
+            duration: "3 weeks",
             lessons: [
                 {
                     id: 1,
@@ -110,6 +162,15 @@ let courseData = {
                         <h3>What is Machine Learning?</h3>
                         <p>Machine Learning (ML) is a subset of AI that focuses on building systems that learn from data without being explicitly programmed. The algorithms learn from historical data and make predictions on new, unseen data.</p>
                         <p>ML algorithms build a model based on sample data, known as training data, in order to make predictions or decisions without being explicitly programmed to do so.</p>
+                        <h4>Key Components:</h4>
+                        <ul>
+                            <li><strong>Training Data:</strong> Historical examples used to teach the model</li>
+                            <li><strong>Features:</strong> Input variables used for prediction</li>
+                            <li><strong>Target Variable:</strong> The outcome the model predicts</li>
+                            <li><strong>Model:</strong> The mathematical representation of the pattern</li>
+                        </ul>
+                        <h4>ML vs Traditional Programming:</h4>
+                        <p>In traditional programming, we input data and programs to get outputs. In ML, we input data and outputs to get programs (models).</p>
                     `,
                     completed: false
                 },
@@ -118,12 +179,68 @@ let courseData = {
                     title: "Types of Learning",
                     content: `
                         <h3>Types of Machine Learning</h3>
-                        <p>There are three main types of machine learning:</p>
-                        <ol>
-                            <li><strong>Supervised Learning:</strong> The model learns from labeled training data</li>
-                            <li><strong>Unsupervised Learning:</strong> The model learns from unlabeled data</li>
-                            <li><strong>Reinforcement Learning:</strong> The model learns through rewards and penalties</li>
-                        </ol>
+                        <p>There are three main types of machine learning, each with its own approach and use cases:</p>
+                        <h4>Supervised Learning:</h4>
+                        <ul>
+                            <li>Uses labeled training data</li>
+                            <li>Predicts outputs from input data</li>
+                            <li>Examples: Classification, Regression</li>
+                        </ul>
+                        <h4>Unsupervised Learning:</h4>
+                        <ul>
+                            <li>Uses unlabeled data</li>
+                            <li>Finds patterns in data</li>
+                            <li>Examples: Clustering, Association rule learning</li>
+                        </ul>
+                        <h4>Reinforcement Learning:</h4>
+                        <ul>
+                            <li>Learns through rewards and penalties</li>
+                            <li>Interacts with environment</li>
+                            <li>Examples: Game playing, Robotics, Recommendation systems</li>
+                        </ul>
+                    `,
+                    completed: false
+                },
+                {
+                    id: 3,
+                    title: "Common ML Algorithms",
+                    content: `
+                        <h3>Common Machine Learning Algorithms</h3>
+                        <p>Different algorithms are suited for different types of problems. Here are some of the most commonly used algorithms:</p>
+                        <h4>Linear Regression:</h4>
+                        <p>Used for predicting continuous values. Finds the best linear relationship between input features and target variable.</p>
+                        <h4>Logistic Regression:</h4>
+                        <p>Used for binary classification problems. Predicts probability of belonging to a class.</p>
+                        <h4>Decision Trees:</h4>
+                        <p>Creates a tree-like model of decisions. Easy to interpret and visualize.</p>
+                        <h4>K-Means Clustering:</h4>
+                        <p>Groups similar data points together. Used for market segmentation, image compression.</p>
+                        <h4>Neural Networks:</h4>
+                        <p>Computational models inspired by biological neural networks. Foundation of deep learning.</p>
+                    `,
+                    completed: false
+                },
+                {
+                    id: 4,
+                    title: "Model Evaluation",
+                    content: `
+                        <h3>Evaluating Machine Learning Models</h3>
+                        <p>Evaluation is crucial to ensure models perform well on new, unseen data. Different metrics are used for different types of problems.</p>
+                        <h4>Classification Metrics:</h4>
+                        <ul>
+                            <li><strong>Accuracy:</strong> Percentage of correct predictions</li>
+                            <li><strong>Precision:</strong> Proportion of positive predictions that were correct</li>
+                            <li><strong>Recall:</strong> Proportion of actual positives that were identified</li>
+                            <li><strong>F1-Score:</strong> Harmonic mean of precision and recall</li>
+                        </ul>
+                        <h4>Regression Metrics:</h4>
+                        <ul>
+                            <li><strong>Mean Absolute Error (MAE):</strong> Average absolute difference between predicted and actual values</li>
+                            <li><strong>Mean Squared Error (MSE):</strong> Average squared difference between predicted and actual values</li>
+                            <li><strong>R² Score:</strong> Proportion of variance explained by the model</li>
+                        </ul>
+                        <h4>Overfitting and Underfitting:</h4>
+                        <p>Overfitting occurs when a model learns too much from training data and fails to generalize. Underfitting occurs when a model is too simple to capture the underlying pattern.</p>
                     `,
                     completed: false
                 }
@@ -133,22 +250,32 @@ let courseData = {
                     {
                         question: "What is Machine Learning?",
                         options: ["A type of robot", "A subset of AI that learns from data", "A programming language", "A database system"],
-                        correct: 1
+                        correct: 1,
+                        explanation: "Machine Learning is a subset of AI that focuses on building systems that learn from data without being explicitly programmed."
                     },
                     {
-                        question: "Which type of learning uses labeled data?",
+                        question: "Which type of learning uses labeled training data?",
                         options: ["Unsupervised Learning", "Reinforcement Learning", "Supervised Learning", "None of the above"],
-                        correct: 2
+                        correct: 2,
+                        explanation: "Supervised learning uses labeled training data to make predictions on new data."
+                    },
+                    {
+                        question: "What is overfitting in ML?",
+                        options: ["Model is too simple", "Model learns too much from training data", "Model has no training data", "Model is too fast"],
+                        correct: 1,
+                        explanation: "Overfitting occurs when a model learns the training data too well, including noise and outliers, and fails to generalize to new data."
                     }
                 ],
-                completed: false
+                completed: false,
+                score: 0
             },
             completed: false
         },
         {
             id: 3,
             title: "Neural Networks and Deep Learning",
-            description: "Deep dive into neural networks and deep learning concepts",
+            description: "Deep dive into neural networks and deep learning concepts and applications",
+            duration: "3 weeks",
             lessons: [
                 {
                     id: 1,
@@ -156,7 +283,80 @@ let courseData = {
                     content: `
                         <h3>Neural Networks</h3>
                         <p>Artificial neural networks are computing systems vaguely inspired by the biological neural networks that constitute animal brains. They consist of interconnected nodes (neurons) that process information using dynamic state responses to external inputs.</p>
-                        <p>Neural networks use connection weights that need to be learned during a training process to achieve desired results.</p>
+                        <h4>Structure of Neural Networks:</h4>
+                        <ul>
+                            <li><strong>Input Layer:</strong> Receives data from the external environment</li>
+                            <li><strong>Hidden Layers:</strong> Process the data through weighted connections</li>
+                            <li><strong>Output Layer:</strong> Produces the final result</li>
+                        </ul>
+                        <h4>Learning Process:</h4>
+                        <p>Neural networks learn by adjusting connection weights through a process called backpropagation, minimizing the difference between predicted and actual outputs.</p>
+                        <h4>Activation Functions:</h4>
+                        <p>Functions that determine whether a neuron should be activated. Common ones include ReLU, Sigmoid, and Tanh.</p>
+                    `,
+                    completed: false
+                },
+                {
+                    id: 2,
+                    title: "Deep Learning Architectures",
+                    content: `
+                        <h3>Deep Learning Architectures</h3>
+                        <p>Deep learning involves neural networks with multiple hidden layers. Various architectures have been developed for different tasks:</p>
+                        <h4>Convolutional Neural Networks (CNNs):</h4>
+                        <p>Specialized for processing grid-like data such as images. Uses convolutional layers to detect features at different levels of abstraction.</p>
+                        <h4>Recurrent Neural Networks (RNNs):</h4>
+                        <p>Designed for sequential data like text or time series. Has connections that form directed cycles, allowing for memory of previous inputs.</p>
+                        <h4>Long Short-Term Memory (LSTM):</h4>
+                        <p>A special type of RNN that can learn long-term dependencies. Addresses the vanishing gradient problem in traditional RNNs.</p>
+                        <h4>Transformers:</h4>
+                        <p>Architecture based on attention mechanisms, particularly successful in natural language processing tasks.</p>
+                    `,
+                    completed: false
+                },
+                {
+                    id: 3,
+                    title: "Training Deep Networks",
+                    content: `
+                        <h3>Training Deep Neural Networks</h3>
+                        <p>Training deep networks involves several challenges and techniques to achieve good performance:</p>
+                        <h4>Gradient Descent:</h4>
+                        <p>Optimization algorithm that minimizes the loss function by iteratively moving in the direction of steepest descent.</p>
+                        <h4>Backpropagation:</h4>
+                        <p>Algorithm for calculating gradients in neural networks. Propagates the error gradient from the output layer back to the input layer.</p>
+                        <h4>Regularization Techniques:</h4>
+                        <ul>
+                            <li><strong>Dropout:</strong> Randomly setting some neurons to zero during training</li>
+                            <li><strong>L1/L2 Regularization:</strong> Adding penalty terms to prevent overfitting</li>
+                            <li><strong>Batch Normalization:</strong> Normalizing inputs to each layer</li>
+                        </ul>
+                        <h4>Hyperparameter Tuning:</h4>
+                        <p>Adjusting parameters like learning rate, batch size, and network architecture to optimize performance.</p>
+                    `,
+                    completed: false
+                },
+                {
+                    id: 4,
+                    title: "Applications and Future",
+                    content: `
+                        <h3>Applications and Future of Deep Learning</h3>
+                        <p>Deep learning has enabled breakthroughs in many fields and continues to evolve:</p>
+                        <h4>Current Applications:</h4>
+                        <ul>
+                            <li>Computer Vision: Image recognition, object detection</li>
+                            <li>Natural Language Processing: Translation, text generation, question answering</li>
+                            <li>Speech Recognition: Virtual assistants, transcription services</li>
+                            <li>Autonomous Systems: Self-driving cars, robotics</li>
+                            <li>Healthcare: Medical imaging analysis, drug discovery</li>
+                        </ul>
+                        <h4>Future Directions:</h4>
+                        <ul>
+                            <li>Federated Learning: Training on distributed data</li>
+                            <li>Neuromorphic Computing: Hardware designed for neural networks</li>
+                            <li>Explainable AI: Making neural networks more interpretable</li>
+                            <li>Continual Learning: Networks that learn without forgetting</li>
+                        </ul>
+                        <h4>Challenges:</h4>
+                        <p>Despite successes, deep learning faces challenges including data requirements, interpretability, and robustness to adversarial examples.</p>
                     `,
                     completed: false
                 }
@@ -166,10 +366,24 @@ let courseData = {
                     {
                         question: "What are artificial neural networks inspired by?",
                         options: ["Computer processors", "Biological neural networks", "Mathematical formulas", "Software algorithms"],
-                        correct: 1
+                        correct: 1,
+                        explanation: "Artificial neural networks are computing systems inspired by the biological neural networks that constitute animal brains."
+                    },
+                    {
+                        question: "What does CNN stand for in deep learning?",
+                        options: ["Computer Neural Network", "Convolutional Neural Network", "Central Neural Network", "Core Neural Network"],
+                        correct: 1,
+                        explanation: "CNN stands for Convolutional Neural Network, which is specialized for processing grid-like data such as images."
+                    },
+                    {
+                        question: "What is the main advantage of LSTM over traditional RNNs?",
+                        options: ["Faster training", "Better handling of long-term dependencies", "Less memory usage", "Simpler architecture"],
+                        correct: 1,
+                        explanation: "Long Short-Term Memory (LSTM) networks address the vanishing gradient problem in traditional RNNs and are better at handling long-term dependencies."
                     }
                 ],
-                completed: false
+                completed: false,
+                score: 0
             },
             completed: false
         }
@@ -180,7 +394,8 @@ let appData = {
     students: [],
     currentUser: null,
     currentAdmin: null,
-    certificates: []
+    certificates: [],
+    recentActivity: []
 };
 
 // Load data from localStorage
@@ -249,7 +464,14 @@ function showPage(pageId) {
         loadStudentDashboard();
     } else if (pageId === 'admin' && appData.currentAdmin) {
         loadAdminDashboard();
+    } else if (pageId === 'certificate' && appData.currentUser) {
+        checkCertificateAvailability();
     }
+}
+
+// Setup courses page
+function setupCoursesPage() {
+    // This page is static in this implementation
 }
 
 // Authentication setup
@@ -260,12 +482,18 @@ function setupAuthentication() {
         signupForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            const fullName = document.getElementById('full-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
             
             if (password !== confirmPassword) {
                 alert('Passwords do not match!');
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long!');
                 return;
             }
             
@@ -279,18 +507,29 @@ function setupAuthentication() {
             // Create new user
             const newUser = {
                 id: Date.now(),
+                name: fullName,
                 email: email,
                 password: password, // In a real app, this would be hashed
-                name: email.split('@')[0], // Use part of email as name
                 progress: 0,
                 modulesProgress: {},
                 completedModules: [],
+                quizScores: {},
                 registrationDate: new Date().toISOString(),
-                lastAccess: new Date().toISOString()
+                lastAccess: new Date().toISOString(),
+                enrolledCourses: [1, 2, 3] // All courses initially
             };
             
             appData.students.push(newUser);
             appData.currentUser = newUser;
+            
+            // Add to recent activity
+            appData.recentActivity.push({
+                id: Date.now(),
+                userId: newUser.id,
+                action: 'Account created',
+                timestamp: new Date().toISOString()
+            });
+            
             saveData();
             
             // Update UI
@@ -319,6 +558,15 @@ function setupAuthentication() {
             if (user) {
                 appData.currentUser = user;
                 user.lastAccess = new Date().toISOString();
+                
+                // Add to recent activity
+                appData.recentActivity.push({
+                    id: Date.now(),
+                    userId: user.id,
+                    action: 'Login',
+                    timestamp: new Date().toISOString()
+                });
+                
                 saveData();
                 
                 // Update UI
@@ -376,19 +624,42 @@ function updateAuthUI() {
     const authBtn = document.getElementById('auth-btn');
     const dashboardLink = document.getElementById('dashboard-link');
     const adminLink = document.getElementById('admin-link');
+    const userName = document.getElementById('user-name');
+    const userEmail = document.getElementById('user-email');
     
-    if (authBtn) {
-        if (appData.currentUser) {
-            authBtn.textContent = 'Dashboard';
-            dashboardLink.style.display = 'inline';
-            
-            // Show admin link if user is admin
-            if (appData.currentUser.email === 'admin@aitutorials.com') {
-                adminLink.style.display = 'inline';
+    if (appData.currentUser) {
+        if (authBtn) {
+            authBtn.innerHTML = '<i class="fas fa-user"></i> <span>Dashboard</span>';
+        }
+        
+        if (dashboardLink) {
+            dashboardLink.style.display = 'inline-flex';
+        }
+        
+        if (userName) {
+            userName.textContent = appData.currentUser.name.split(' ')[0];
+        }
+        
+        if (userEmail) {
+            userEmail.textContent = appData.currentUser.email;
+        }
+        
+        // Show admin link if user is admin
+        if (appData.currentUser.email === 'admin@aitutorials.com') {
+            if (adminLink) {
+                adminLink.style.display = 'inline-flex';
             }
-        } else {
-            authBtn.textContent = 'Login';
+        }
+    } else {
+        if (authBtn) {
+            authBtn.innerHTML = '<i class="fas fa-user"></i> <span>Login</span>';
+        }
+        
+        if (dashboardLink) {
             dashboardLink.style.display = 'none';
+        }
+        
+        if (adminLink) {
             adminLink.style.display = 'none';
         }
     }
@@ -409,6 +680,11 @@ function checkAuthStatus() {
             } else {
                 showPage('student-dashboard');
             }
+        }
+        
+        // If on certificate page, check if user can access it
+        if (currentPage && currentPage.id === 'certificate') {
+            checkCertificateAvailability();
         }
     }
 }
@@ -445,14 +721,21 @@ function setupStudentDashboard() {
 function loadStudentDashboard() {
     if (!appData.currentUser) return;
     
-    // Update user name
+    // Update user name and email
     document.getElementById('user-name').textContent = appData.currentUser.name;
+    document.getElementById('user-email').textContent = appData.currentUser.email;
     
     // Calculate overall progress
     calculateAndDisplayProgress();
     
     // Load modules
     loadModules();
+    
+    // Load stats
+    loadDashboardStats();
+    
+    // Load recent activity
+    loadRecentActivity();
 }
 
 // Calculate and display progress
@@ -495,6 +778,43 @@ function calculateAndDisplayProgress() {
     saveData();
 }
 
+// Load dashboard stats
+function loadDashboardStats() {
+    if (!appData.currentUser) return;
+    
+    const user = appData.currentUser;
+    
+    // Calculate completed modules
+    const completedModules = user.completedModules.length;
+    const totalModules = courseData.modules.length;
+    
+    document.getElementById('completed-modules').textContent = `${completedModules}/${totalModules}`;
+    
+    // Calculate completed lessons
+    let totalLessons = 0;
+    let completedLessons = 0;
+    
+    courseData.modules.forEach(module => {
+        module.lessons.forEach(lesson => {
+            totalLessons++;
+            if (user.modulesProgress[`${module.id}-${lesson.id}`]) {
+                completedLessons++;
+            }
+        });
+    });
+    
+    document.getElementById('completed-lessons').textContent = `${completedLessons}/${totalLessons}`;
+    
+    // Calculate average quiz score
+    if (user.quizScores && Object.keys(user.quizScores).length > 0) {
+        const scores = Object.values(user.quizScores);
+        const avgScore = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+        document.getElementById('quizzes-score').textContent = `${avgScore}%`;
+    } else {
+        document.getElementById('quizzes-score').textContent = `0%`;
+    }
+}
+
 // Load modules in dashboard
 function loadModules() {
     const modulesContainer = document.getElementById('modules-container');
@@ -528,20 +848,30 @@ function loadModules() {
         
         moduleCard.innerHTML = `
             <div class="module-header" data-module-id="${module.id}">
-                <h3 class="module-title">${module.title}</h3>
-                <span>${moduleProgress}%</span>
+                <div>
+                    <h3 class="module-title">${module.title}</h3>
+                    <p>${module.description}</p>
+                </div>
+                <div class="module-meta">
+                    <span>${module.duration}</span>
+                    <span>${moduleProgress}%</span>
+                </div>
                 <span class="module-expand">▼</span>
             </div>
             <div class="module-body">
-                <p>${module.description}</p>
                 <div class="lessons-list">
                     ${module.lessons.map(lesson => {
                         const isCompleted = appData.currentUser.modulesProgress[`${module.id}-${lesson.id}`];
+                        const isCurrent = (
+                            appData.currentUser.currentModule === module.id && 
+                            appData.currentUser.currentLesson === lesson.id
+                        );
+                        
                         return `
-                            <div class="lesson-item">
+                            <div class="lesson-item ${isCurrent ? 'current' : ''}">
                                 <h4 class="lesson-title">${lesson.title}</h4>
-                                <span class="lesson-status ${isCompleted ? 'completed' : 'incomplete'}">
-                                    ${isCompleted ? 'Completed' : 'Not Started'}
+                                <span class="lesson-status ${isCompleted ? 'completed' : isCurrent ? 'in-progress' : 'incomplete'}">
+                                    ${isCompleted ? 'Completed' : isCurrent ? 'In Progress' : 'Not Started'}
                                 </span>
                             </div>
                         `;
@@ -551,12 +881,14 @@ function loadModules() {
                         <div class="lesson-item">
                             <h4 class="lesson-title">Module Quiz</h4>
                             <span class="lesson-status ${appData.currentUser.modulesProgress[`quiz-${module.id}`] ? 'completed' : 'incomplete'}">
-                                ${appData.currentUser.modulesProgress[`quiz-${module.id}`] ? 'Completed' : 'Not Started'}
+                                ${appData.currentUser.modulesProgress[`quiz-${module.id}`] ? 
+                                    `Score: ${appData.currentUser.quizScores?.[`quiz-${module.id}`] || 0}%` : 
+                                    'Not Started'}
                             </span>
                         </div>
                     ` : ''}
                 </div>
-                <button class="cta-button start-module-btn" data-module-id="${module.id}">Start Module</button>
+                <button class="cta-button primary" data-module-id="${module.id}">Start Module</button>
             </div>
         `;
         
@@ -580,12 +912,77 @@ function loadModules() {
     });
     
     // Add event listeners for start module buttons
-    document.querySelectorAll('.start-module-btn').forEach(btn => {
+    document.querySelectorAll('.module-card .cta-button').forEach(btn => {
         btn.addEventListener('click', function() {
             const moduleId = this.getAttribute('data-module-id');
             showModuleDetail(moduleId);
         });
     });
+}
+
+// Load recent activity
+function loadRecentActivity() {
+    const activityContainer = document.getElementById('recent-activity');
+    if (!activityContainer || !appData.currentUser) return;
+    
+    // Get recent activity for this user
+    const userActivities = appData.recentActivity
+        .filter(activity => activity.userId === appData.currentUser.id)
+        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+        .slice(0, 5);
+    
+    activityContainer.innerHTML = '';
+    
+    userActivities.forEach(activity => {
+        const activityItem = document.createElement('div');
+        activityItem.className = 'activity-item';
+        
+        const timeAgo = timeAgoString(activity.timestamp);
+        
+        activityItem.innerHTML = `
+            <i class="fas fa-${getActivityIcon(activity.action)}"></i>
+            <div>
+                <p>${activity.action}</p>
+                <span>${timeAgo}</span>
+            </div>
+        `;
+        
+        activityContainer.appendChild(activityItem);
+    });
+    
+    if (userActivities.length === 0) {
+        activityContainer.innerHTML = '<p>No recent activity</p>';
+    }
+}
+
+// Helper function to get icon for activity
+function getActivityIcon(action) {
+    switch(action) {
+        case 'Account created':
+            return 'user-plus';
+        case 'Login':
+            return 'sign-in-alt';
+        case 'Lesson completed':
+            return 'check-circle';
+        case 'Quiz completed':
+            return 'tasks';
+        case 'Module completed':
+            return 'trophy';
+        default:
+            return 'clock';
+    }
+}
+
+// Helper function to format time ago
+function timeAgoString(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - date) / 1000);
+    
+    if (diffInSeconds < 60) return 'Just now';
+    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+    if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+    return `${Math.floor(diffInSeconds / 86400)} days ago`;
 }
 
 // Show module detail view
@@ -595,6 +992,9 @@ function showModuleDetail(moduleId) {
     
     // Update module title
     document.getElementById('module-title').textContent = module.title;
+    
+    // Update module outline
+    updateModuleOutline(module);
     
     // Show current lesson (start with first incomplete, or first if none completed)
     let currentLessonIndex = 0;
@@ -617,6 +1017,64 @@ function showModuleDetail(moduleId) {
     showPage('module-detail');
 }
 
+// Update module outline
+function updateModuleOutline(module) {
+    const outlineContainer = document.getElementById('module-outline-content');
+    if (!outlineContainer) return;
+    
+    let outlineHtml = '<ul>';
+    
+    module.lessons.forEach((lesson, index) => {
+        const isCompleted = appData.currentUser.modulesProgress[`${module.id}-${lesson.id}`];
+        const isActive = (
+            appData.currentUser.currentModule === module.id && 
+            appData.currentUser.currentLesson === lesson.id
+        );
+        
+        outlineHtml += `
+            <li>
+                <a href="#" class="${isCompleted ? 'completed' : isActive ? 'active' : ''}" 
+                   data-lesson-index="${index}">
+                    <i class="fas fa-${isCompleted ? 'check-circle' : isActive ? 'play-circle' : 'circle'}"></i>
+                    ${lesson.title}
+                </a>
+            </li>
+        `;
+    });
+    
+    if (module.quiz) {
+        const quizCompleted = appData.currentUser.modulesProgress[`quiz-${module.id}`];
+        outlineHtml += `
+            <li>
+                <a href="#" class="${quizCompleted ? 'completed' : ''}" data-quiz>
+                    <i class="fas fa-${quizCompleted ? 'check-circle' : 'question-circle'}"></i>
+                    Module Quiz
+                </a>
+            </li>
+        `;
+    }
+    
+    outlineHtml += '</ul>';
+    outlineContainer.innerHTML = outlineHtml;
+    
+    // Add event listeners for lesson navigation
+    document.querySelectorAll('#module-outline-content a[data-lesson-index]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const lessonIndex = parseInt(this.getAttribute('data-lesson-index'));
+            showLessonContent(module, lessonIndex);
+        });
+    });
+    
+    // Add event listener for quiz
+    document.querySelectorAll('#module-outline-content a[data-quiz]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            showModuleQuiz(module);
+        });
+    });
+}
+
 // Show lesson content
 function showLessonContent(module, lessonIndex) {
     const lesson = module.lessons[lessonIndex];
@@ -631,6 +1089,12 @@ function showLessonContent(module, lessonIndex) {
     
     // Update navigation buttons
     updateLessonNavigation(module, lessonIndex);
+    
+    // Update current lesson tracking
+    if (appData.currentUser) {
+        appData.currentUser.currentModule = module.id;
+        appData.currentUser.currentLesson = lesson.id;
+    }
 }
 
 // Update lesson navigation buttons
@@ -657,7 +1121,17 @@ function updateLessonNavigation(module, lessonIndex) {
             nextBtn.textContent = 'Take Quiz';
             nextBtn.onclick = () => showModuleQuiz(module);
         } else {
-            nextBtn.style.display = 'none';
+            nextBtn.style.display = 'inline-block';
+            nextBtn.textContent = 'Next';
+            nextBtn.onclick = () => {
+                // Move to next module if available, otherwise back to dashboard
+                const currentModuleIndex = courseData.modules.findIndex(m => m.id == module.id);
+                if (currentModuleIndex < courseData.modules.length - 1) {
+                    showModuleDetail(courseData.modules[currentModuleIndex + 1].id);
+                } else {
+                    showPage('student-dashboard');
+                }
+            };
         }
     }
     
@@ -679,6 +1153,14 @@ function markLessonComplete(module, lessonIndex) {
     const lesson = module.lessons[lessonIndex];
     appData.currentUser.modulesProgress[`${module.id}-${lesson.id}`] = true;
     
+    // Add to recent activity
+    appData.recentActivity.push({
+        id: Date.now(),
+        userId: appData.currentUser.id,
+        action: `Lesson completed: ${lesson.title}`,
+        timestamp: new Date().toISOString()
+    });
+    
     // Check if all lessons in module are complete
     let allLessonsComplete = true;
     module.lessons.forEach(lesson => {
@@ -689,12 +1171,25 @@ function markLessonComplete(module, lessonIndex) {
     
     // If all lessons complete and no quiz or quiz already taken, mark module as complete
     if (allLessonsComplete && (!module.quiz || appData.currentUser.modulesProgress[`quiz-${module.id}`])) {
-        appData.currentUser.completedModules.push(module.id);
+        if (!appData.currentUser.completedModules.includes(module.id)) {
+            appData.currentUser.completedModules.push(module.id);
+            
+            // Add to recent activity
+            appData.recentActivity.push({
+                id: Date.now(),
+                userId: appData.currentUser.id,
+                action: `Module completed: ${module.title}`,
+                timestamp: new Date().toISOString()
+            });
+        }
     }
     
     // Update progress
     calculateAndDisplayProgress();
+    loadDashboardStats();
     updateModuleProgressDisplay(module);
+    updateModuleOutline(module);
+    loadRecentActivity();
     
     // Move to next lesson if available
     if (lessonIndex < module.lessons.length - 1) {
@@ -704,7 +1199,8 @@ function markLessonComplete(module, lessonIndex) {
         showModuleQuiz(module);
     } else {
         // All done with this module
-        alert('Module completed! Check your dashboard for next steps.');
+        alert(`Congratulations! You've completed the "${module.title}" module.`);
+        showPage('student-dashboard');
     }
     
     saveData();
@@ -771,6 +1267,11 @@ function submitQuiz(module) {
         }
     });
     
+    if (answers.some(ans => ans === null)) {
+        alert('Please answer all questions before submitting.');
+        return;
+    }
+    
     // Grade quiz
     let correctCount = 0;
     module.quiz.questions.forEach((question, index) => {
@@ -786,6 +1287,15 @@ function submitQuiz(module) {
     
     // Mark quiz as completed
     appData.currentUser.modulesProgress[`quiz-${module.id}`] = true;
+    appData.currentUser.quizScores[`quiz-${module.id}`] = score;
+    
+    // Add to recent activity
+    appData.recentActivity.push({
+        id: Date.now(),
+        userId: appData.currentUser.id,
+        action: `Quiz completed: ${module.title} (Score: ${score}%)`,
+        timestamp: new Date().toISOString()
+    });
     
     // Check if all lessons and quiz are complete
     let allLessonsComplete = true;
@@ -796,7 +1306,17 @@ function submitQuiz(module) {
     });
     
     if (allLessonsComplete) {
-        appData.currentUser.completedModules.push(module.id);
+        if (!appData.currentUser.completedModules.includes(module.id)) {
+            appData.currentUser.completedModules.push(module.id);
+            
+            // Add to recent activity
+            appData.recentActivity.push({
+                id: Date.now(),
+                userId: appData.currentUser.id,
+                action: `Module completed: ${module.title}`,
+                timestamp: new Date().toISOString()
+            });
+        }
         
         // Check if all modules are completed for certificate
         const allModulesComplete = courseData.modules.every(mod => 
@@ -811,7 +1331,10 @@ function submitQuiz(module) {
     
     // Update progress
     calculateAndDisplayProgress();
+    loadDashboardStats();
     updateModuleProgressDisplay(module);
+    updateModuleOutline(module);
+    loadRecentActivity();
     
     saveData();
     
@@ -870,7 +1393,26 @@ function issueCertificate() {
     document.getElementById('completion-date').textContent = certificate.issueDate;
     document.getElementById('certificate-id').textContent = certificate.id;
     
+    // Add to recent activity
+    appData.recentActivity.push({
+        id: Date.now(),
+        userId: appData.currentUser.id,
+        action: 'Certificate earned',
+        timestamp: new Date().toISOString()
+    });
+    
     saveData();
+}
+
+// Check if certificate is available
+function checkCertificateAvailability() {
+    if (appData.currentUser && hasUserCompletedCourse(appData.currentUser)) {
+        // Show certificate page
+        showPage('certificate');
+    } else {
+        // Redirect to dashboard
+        showPage('student-dashboard');
+    }
 }
 
 // Setup module detail view
@@ -883,6 +1425,10 @@ function setupCertificateView() {
     document.getElementById('download-certificate')?.addEventListener('click', function() {
         // In a real implementation, this would generate a PDF
         alert('Certificate would be downloaded in a real implementation. For now, you can take a screenshot.');
+    });
+    
+    document.getElementById('share-certificate')?.addEventListener('click', function() {
+        alert('Certificate sharing functionality would be implemented in a full application.');
     });
 }
 
@@ -911,12 +1457,28 @@ function setupAdminDashboard() {
     document.getElementById('add-module-btn')?.addEventListener('click', function() {
         alert('In a real implementation, this would open a form to add a new module.');
     });
+    
+    // Search users
+    document.getElementById('search-users')?.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        filterUsers(searchTerm);
+    });
 }
 
 // Load admin dashboard
 function loadAdminDashboard() {
     // Update student statistics
     document.getElementById('total-students').textContent = appData.students.length;
+    
+    // Calculate active students (accessed in last 30 days)
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    
+    const activeStudents = appData.students.filter(student => 
+        new Date(student.lastAccess) > thirtyDaysAgo
+    ).length;
+    
+    document.getElementById('active-students').textContent = activeStudents;
     
     // Calculate completion rate
     if (appData.students.length > 0) {
@@ -928,14 +1490,12 @@ function loadAdminDashboard() {
         const completionRate = Math.round((completedStudents / appData.students.length) * 100);
         document.getElementById('completion-rate').textContent = `${completionRate}%`;
         
-        // Calculate average progress
-        const totalProgress = appData.students.reduce((sum, student) => sum + student.progress, 0);
-        const averageProgress = Math.round(totalProgress / appData.students.length);
-        document.getElementById('average-progress').textContent = `${averageProgress}%`;
+        // Update certificates issued
+        document.getElementById('certificates-issued').textContent = appData.certificates.length;
     }
     
     // Show recent activity
-    loadRecentActivity();
+    loadRecentActivityAdmin();
     
     // Load modules editor
     loadModulesEditor();
@@ -944,24 +1504,30 @@ function loadAdminDashboard() {
     loadUsersList();
 }
 
-// Load recent activity
-function loadRecentActivity() {
+// Load recent activity for admin
+function loadRecentActivityAdmin() {
     const activityContainer = document.getElementById('recent-activity');
     if (!activityContainer) return;
     
-    // Show last 5 student activities
-    const recentStudents = [...appData.students]
-        .sort((a, b) => new Date(b.lastAccess) - new Date(a.lastAccess))
-        .slice(0, 5);
+    // Get last 10 activities
+    const recentActivities = [...appData.recentActivity]
+        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+        .slice(0, 10);
     
     let activityHtml = '';
     
-    if (recentStudents.length > 0) {
-        recentStudents.forEach(student => {
+    if (recentActivities.length > 0) {
+        recentActivities.forEach(activity => {
+            const student = appData.students.find(s => s.id === activity.userId);
+            const timeAgo = timeAgoString(activity.timestamp);
+            
             activityHtml += `
                 <div class="activity-item">
-                    <p><strong>${student.name}</strong> accessed the course on ${new Date(student.lastAccess).toLocaleString()}</p>
-                    <p>Progress: ${student.progress}%</p>
+                    <i class="fas fa-${getActivityIcon(activity.action)}"></i>
+                    <div>
+                        <p><strong>${student ? student.name : 'Unknown'}</strong> - ${activity.action}</p>
+                        <span>${timeAgo}</span>
+                    </div>
                 </div>
             `;
         });
@@ -980,11 +1546,51 @@ function loadModulesEditor() {
     let editorHtml = '';
     
     courseData.modules.forEach(module => {
+        // Calculate statistics for this module
+        let totalLessons = 0;
+        let completedLessons = 0;
+        let totalQuizzes = 0;
+        let completedQuizzes = 0;
+        
+        appData.students.forEach(student => {
+            module.lessons.forEach(lesson => {
+                totalLessons++;
+                if (student.modulesProgress[`${module.id}-${lesson.id}`]) {
+                    completedLessons++;
+                }
+            });
+            
+            if (module.quiz) {
+                totalQuizzes++;
+                if (student.modulesProgress[`quiz-${module.id}`]) {
+                    completedQuizzes++;
+                }
+            }
+        });
+        
+        const lessonCompletionRate = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+        const quizCompletionRate = totalQuizzes > 0 ? Math.round((completedQuizzes / totalQuizzes) * 100) : 0;
+        
         editorHtml += `
             <div class="module-editor">
-                <h4>${module.title}</h4>
+                <div class="module-header">
+                    <h4>${module.title}</h4>
+                    <div class="module-meta">
+                        <span>${module.duration}</span>
+                    </div>
+                </div>
                 <p>${module.description}</p>
-                <p>Lessons: ${module.lessons.length} | Quiz: ${module.quiz ? 'Yes' : 'No'}</p>
+                <div class="module-stats">
+                    <div class="stat">
+                        <span><strong>Lessons:</strong> ${module.lessons.length}</span>
+                    </div>
+                    <div class="stat">
+                        <span><strong>Lesson Completion:</strong> ${lessonCompletionRate}%</span>
+                    </div>
+                    <div class="stat">
+                        <span><strong>Quiz Completion:</strong> ${quizCompletionRate}%</span>
+                    </div>
+                </div>
                 <button class="edit-module-btn" data-module-id="${module.id}">Edit Module</button>
             </div>
         `;
@@ -1003,29 +1609,54 @@ function loadModulesEditor() {
 
 // Load users list
 function loadUsersList() {
+    renderUsersList(appData.students);
+}
+
+// Render users list with optional filter
+function renderUsersList(users) {
     const usersContainer = document.getElementById('users-list');
     if (!usersContainer) return;
     
-    if (appData.students.length > 0) {
-        let usersHtml = '<div class="users-list">';
+    if (users.length > 0) {
+        let usersHtml = '';
         
-        appData.students.forEach(student => {
+        users.forEach(student => {
+            // Calculate student stats
+            const totalLessons = courseData.modules.reduce((sum, mod) => sum + mod.lessons.length, 0);
+            const completedLessons = Object.keys(student.modulesProgress).filter(key => !key.startsWith('quiz-')).length;
+            const progressPercentage = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+            
+            const completedModules = student.completedModules.length;
+            const totalModules = courseData.modules.length;
+            
             usersHtml += `
                 <div class="user-card">
-                    <h4>${student.name}</h4>
-                    <p><strong>Email:</strong> ${student.email}</p>
-                    <p><strong>Progress:</strong> ${student.progress}%</p>
-                    <p><strong>Modules Completed:</strong> ${student.completedModules.length}/${courseData.modules.length}</p>
-                    <p><strong>Registered:</strong> ${new Date(student.registrationDate).toLocaleDateString()}</p>
+                    <div class="user-header">
+                        <h4>${student.name}</h4>
+                        <span class="user-status">${student.email}</span>
+                    </div>
+                    <p><strong>Progress:</strong> ${progressPercentage}%</p>
+                    <p><strong>Modules Completed:</strong> ${completedModules}/${totalModules}</p>
+                    <p><strong>Registration:</strong> ${new Date(student.registrationDate).toLocaleDateString()}</p>
+                    <p><strong>Last Access:</strong> ${new Date(student.lastAccess).toLocaleDateString()}</p>
                 </div>
             `;
         });
         
-        usersHtml += '</div>';
         usersContainer.innerHTML = usersHtml;
     } else {
-        usersContainer.innerHTML = '<p>No students enrolled yet</p>';
+        usersContainer.innerHTML = '<p>No students found</p>';
     }
+}
+
+// Filter users by search term
+function filterUsers(searchTerm) {
+    const filteredUsers = appData.students.filter(student => 
+        student.name.toLowerCase().includes(searchTerm) || 
+        student.email.toLowerCase().includes(searchTerm)
+    );
+    
+    renderUsersList(filteredUsers);
 }
 
 // Additional utility functions
