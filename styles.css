@@ -849,6 +849,180 @@ body {
     margin-top: 0.3rem;
 }
 
+/* Course Resources */
+.resources-list {
+    list-style: none;
+    margin: 1rem 0;
+}
+
+.resource-item {
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.resource-item i {
+    color: #4a6cf7;
+    font-size: 1.2rem;
+}
+
+.resource-item a {
+    color: #4a6cf7;
+    text-decoration: none;
+    flex: 1;
+}
+
+.resource-item a:hover {
+    text-decoration: underline;
+}
+
+/* Discussion Forum */
+#discussion-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.comments-list {
+    margin-bottom: 1.5rem;
+}
+
+.comment-item {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 3px solid #4a6cf7;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.comment-header strong {
+    color: #2c3e50;
+}
+
+.comment-time {
+    color: #777;
+}
+
+.comment-likes {
+    color: #4a6cf7;
+}
+
+.comment-content {
+    margin: 0;
+    color: #555;
+}
+
+.add-comment {
+    margin-top: 1.5rem;
+}
+
+.add-comment textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-height: 100px;
+    margin-bottom: 1rem;
+    font-family: inherit;
+}
+
+/* Notes Section */
+#notes-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+#lesson-notes {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-height: 150px;
+    margin-bottom: 1rem;
+    font-family: inherit;
+}
+
+/* Wishlist Section */
+.wishlist-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    margin-top: 3rem;
+}
+
+.wishlist-items {
+    margin-top: 1.5rem;
+}
+
+.wishlist-item {
+    padding: 1.5rem;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    background: #f8f9fa;
+}
+
+.wishlist-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.duration {
+    color: #777;
+    font-weight: 500;
+    background: #eef2ff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.remove-from-wishlist, .add-to-wishlist-btn {
+    background: #f8f9fa;
+    color: #4a6cf7;
+    border: 1px solid #4a6cf7;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.remove-from-wishlist:hover, .add-to-wishlist-btn:hover {
+    background: #4a6cf7;
+    color: white;
+}
+
+/* Instructor styling */
+.instructor {
+    color: #777;
+    font-style: italic;
+    margin: 0.5rem 0;
+}
+
+.rating {
+    color: #ffc107;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
 .module-navigation {
     display: flex;
     justify-content: space-between;

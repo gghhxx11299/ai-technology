@@ -632,10 +632,51 @@ let courseData = {
 
 let appData = {
     students: [],
+    instructors: [
+        {
+            id: 1,
+            name: "Dr. Jane Smith",
+            email: "jane.smith@aitutorials.com",
+            bio: "PhD in Computer Science, specializing in AI and Machine Learning",
+            expertise: ["AI", "Machine Learning", "Deep Learning"],
+            rating: 4.8,
+            courses: [1, 2, 3]
+        }
+    ],
     currentUser: null,
     currentAdmin: null,
+    currentInstructor: null,
     certificates: [],
-    recentActivity: []
+    recentActivity: [],
+    courseResources: {
+        1: [
+            { id: 1, name: "AI Fundamentals Slides", type: "pdf", url: "#" },
+            { id: 2, name: "Turing Test Paper", type: "pdf", url: "#" },
+            { id: 3, name: "Ethics in AI Guidelines", type: "pdf", url: "#" }
+        ],
+        2: [
+            { id: 4, name: "ML Algorithms Cheatsheet", type: "pdf", url: "#" },
+            { id: 5, name: "Python ML Tutorial", type: "zip", url: "#" },
+            { id: 6, name: "Dataset for Practice", type: "csv", url: "#" }
+        ],
+        3: [
+            { id: 7, name: "Neural Network Architecture", type: "pdf", url: "#" },
+            { id: 8, name: "TensorFlow Playground", type: "link", url: "#" },
+            { id: 9, name: "CNN Implementation Guide", type: "pdf", url: "#" }
+        ]
+    },
+    courseDiscussions: {
+        1: [
+            { id: 1, lessonId: 1, userId: 1, userName: "John Doe", content: "Great explanation of AI fundamentals!", timestamp: new Date().toISOString(), likes: 5 },
+            { id: 2, lessonId: 1, userId: 2, userName: "Sarah Johnson", content: "I have a question about the Turing Test.", timestamp: new Date().toISOString(), likes: 2 }
+        ],
+        2: [
+            { id: 3, lessonId: 1, userId: 3, userName: "Michael Chen", content: "How do we handle overfitting in practice?", timestamp: new Date().toISOString(), likes: 8 }
+        ]
+    },
+    courseNotes: {},
+    userWishlist: [],
+    userBookmarks: []
 };
 
 // Load data from localStorage
@@ -960,20 +1001,23 @@ function setupStudentDashboard() {
 // Load student dashboard
 function loadStudentDashboard() {
     if (!appData.currentUser) return;
-    
+
     // Update user name and email
     document.getElementById('user-name').textContent = appData.currentUser.name;
     document.getElementById('user-email').textContent = appData.currentUser.email;
-    
+
     // Calculate overall progress
     calculateAndDisplayProgress();
-    
+
     // Load modules
     loadModules();
-    
+
+    // Load wishlist
+    loadWishlist();
+
     // Load stats
     loadDashboardStats();
-    
+
     // Load recent activity
     loadRecentActivity();
 }
@@ -1059,23 +1103,23 @@ function loadDashboardStats() {
 function loadModules() {
     const modulesContainer = document.getElementById('modules-container');
     if (!modulesContainer || !appData.currentUser) return;
-    
+
     modulesContainer.innerHTML = '';
-    
+
     courseData.modules.forEach(module => {
         const moduleCard = document.createElement('div');
         moduleCard.className = 'module-card';
-        
+
         // Calculate module progress
         let totalItems = module.lessons.length;
         let completedItems = 0;
-        
+
         module.lessons.forEach(lesson => {
             if (appData.currentUser.modulesProgress[`${module.id}-${lesson.id}`]) {
                 completedItems++;
             }
         });
-        
+
         // Count quiz if exists
         if (module.quiz) {
             totalItems++;
@@ -1083,18 +1127,23 @@ function loadModules() {
                 completedItems++;
             }
         }
-        
+
         const moduleProgress = totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
-        
+
+        // Get instructor info
+        const instructor = appData.instructors.find(inst => module.id === inst.courses[0]);
+
         moduleCard.innerHTML = `
             <div class="module-header" data-module-id="${module.id}">
                 <div>
                     <h3 class="module-title">${module.title}</h3>
                     <p>${module.description}</p>
+                    ${instructor ? `<p class="instructor">Instructor: ${instructor.name}</p>` : ''}
                 </div>
                 <div class="module-meta">
                     <span>${module.duration}</span>
                     <span>${moduleProgress}%</span>
+                    <span class="rating">${instructor ? instructor.rating : '4.8'} <i class="fas fa-star"></i></span>
                 </div>
                 <span class="module-expand">▼</span>
             </div>
@@ -1103,10 +1152,10 @@ function loadModules() {
                     ${module.lessons.map(lesson => {
                         const isCompleted = appData.currentUser.modulesProgress[`${module.id}-${lesson.id}`];
                         const isCurrent = (
-                            appData.currentUser.currentModule === module.id && 
+                            appData.currentUser.currentModule === module.id &&
                             appData.currentUser.currentLesson === lesson.id
                         );
-                        
+
                         return `
                             <div class="lesson-item ${isCurrent ? 'current' : ''}">
                                 <h4 class="lesson-title">${lesson.title}</h4>
@@ -1116,13 +1165,13 @@ function loadModules() {
                             </div>
                         `;
                     }).join('')}
-                    
+
                     ${module.quiz ? `
                         <div class="lesson-item">
                             <h4 class="lesson-title">Module Quiz</h4>
                             <span class="lesson-status ${appData.currentUser.modulesProgress[`quiz-${module.id}`] ? 'completed' : 'incomplete'}">
-                                ${appData.currentUser.modulesProgress[`quiz-${module.id}`] ? 
-                                    `Score: ${appData.currentUser.quizScores?.[`quiz-${module.id}`] || 0}%` : 
+                                ${appData.currentUser.modulesProgress[`quiz-${module.id}`] ?
+                                    `Score: ${appData.currentUser.quizScores?.[`quiz-${module.id}`] || 0}%` :
                                     'Not Started'}
                             </span>
                         </div>
@@ -1131,16 +1180,16 @@ function loadModules() {
                 <button class="cta-button primary" data-module-id="${module.id}">Start Module</button>
             </div>
         `;
-        
+
         modulesContainer.appendChild(moduleCard);
     });
-    
+
     // Add event listeners for expanding modules
     document.querySelectorAll('.module-header').forEach(header => {
         header.addEventListener('click', function() {
             const moduleId = this.getAttribute('data-module-id');
             const moduleBody = this.nextElementSibling;
-            
+
             if (moduleBody.classList.contains('active')) {
                 moduleBody.classList.remove('active');
                 this.querySelector('.module-expand').textContent = '▼';
@@ -1150,7 +1199,7 @@ function loadModules() {
             }
         });
     });
-    
+
     // Add event listeners for start module buttons
     document.querySelectorAll('.module-card .cta-button').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -1158,6 +1207,93 @@ function loadModules() {
             showModuleDetail(moduleId);
         });
     });
+}
+
+// Load wishlist content
+function loadWishlist() {
+    const wishlistContainer = document.getElementById('wishlist-container');
+    if (!wishlistContainer || !appData.currentUser) return;
+
+    // In this implementation, we'll show all modules as potential wishlist items
+    // since we're using a simplified model
+    let wishlistHtml = '<div class="wishlist-items">';
+
+    courseData.modules.forEach(module => {
+        // Check if this module is in the user's wishlist
+        const isInWishlist = appData.userWishlist.some(item =>
+            item.userId === appData.currentUser.id && item.moduleId === module.id
+        );
+
+        wishlistHtml += `
+            <div class="wishlist-item">
+                <h4>${module.title}</h4>
+                <p>${module.description}</p>
+                <div class="wishlist-actions">
+                    <span class="duration">${module.duration}</span>
+                    ${isInWishlist ?
+                        `<button class="remove-from-wishlist" data-module-id="${module.id}">Remove</button>` :
+                        `<button class="add-to-wishlist-btn" data-module-id="${module.id}">Add to Wishlist</button>`
+                    }
+                    <button class="cta-button primary start-course-btn" data-module-id="${module.id}">Start Course</button>
+                </div>
+            </div>
+        `;
+    });
+
+    wishlistHtml += '</div>';
+    wishlistContainer.innerHTML = wishlistHtml;
+
+    // Add event listeners for wishlist buttons
+    document.querySelectorAll('.add-to-wishlist-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const moduleId = parseInt(this.getAttribute('data-module-id'));
+            addToWishlist(moduleId);
+        });
+    });
+
+    document.querySelectorAll('.remove-from-wishlist').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const moduleId = parseInt(this.getAttribute('data-module-id'));
+            removeFromWishlist(moduleId);
+        });
+    });
+
+    // Add event listeners for start course buttons
+    document.querySelectorAll('.start-course-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const moduleId = parseInt(this.getAttribute('data-module-id'));
+            showModuleDetail(moduleId);
+        });
+    });
+}
+
+// Add item to user's wishlist
+function addToWishlist(moduleId) {
+    const exists = appData.userWishlist.some(item =>
+        item.userId === appData.currentUser.id && item.moduleId === moduleId
+    );
+
+    if (!exists) {
+        appData.userWishlist.push({
+            userId: appData.currentUser.id,
+            moduleId: moduleId,
+            addedDate: new Date().toISOString()
+        });
+
+        saveData();
+        loadWishlist(); // Refresh the wishlist display
+        alert('Course added to your wishlist!');
+    }
+}
+
+// Remove item from user's wishlist
+function removeFromWishlist(moduleId) {
+    appData.userWishlist = appData.userWishlist.filter(item =>
+        !(item.userId === appData.currentUser.id && item.moduleId === moduleId)
+    );
+
+    saveData();
+    loadWishlist(); // Refresh the wishlist display
 }
 
 // Load recent activity
@@ -1320,21 +1456,202 @@ function showLessonContent(module, lessonIndex) {
     const lesson = module.lessons[lessonIndex];
     const lessonContent = document.getElementById('lesson-content');
     const quizSection = document.getElementById('quiz-section');
-    
+    const resourcesSection = document.getElementById('resources-section');
+    const discussionSection = document.getElementById('discussion-section');
+    const notesSection = document.getElementById('notes-section');
+
     if (lessonContent) {
         lessonContent.innerHTML = lesson.content;
         quizSection.style.display = 'none';
+        resourcesSection.style.display = 'none';
+        discussionSection.style.display = 'none';
+        notesSection.style.display = 'none';
         lessonContent.style.display = 'block';
     }
-    
+
     // Update navigation buttons
     updateLessonNavigation(module, lessonIndex);
-    
+
+    // Update resource section
+    loadResources(module.id);
+
+    // Update discussion section
+    loadDiscussion(module.id, lesson.id);
+
+    // Load notes for this lesson
+    loadLessonNotes(module.id, lesson.id);
+
     // Update current lesson tracking
     if (appData.currentUser) {
         appData.currentUser.currentModule = module.id;
         appData.currentUser.currentLesson = lesson.id;
     }
+}
+
+// Load and display course resources
+function loadResources(moduleId) {
+    const resourcesSection = document.getElementById('resources-section');
+    const resourcesList = document.getElementById('resources-list');
+
+    if (!resourcesList || !appData.courseResources[moduleId]) return;
+
+    const resources = appData.courseResources[moduleId];
+    let resourcesHtml = '<ul class="resources-list">';
+
+    resources.forEach(resource => {
+        let icon = 'file-alt';
+        if (resource.type === 'pdf') icon = 'file-pdf';
+        else if (resource.type === 'zip') icon = 'file-archive';
+        else if (resource.type === 'csv') icon = 'file-csv';
+        else if (resource.type === 'link') icon = 'link';
+
+        resourcesHtml += `
+            <li class="resource-item">
+                <i class="fas fa-${icon}"></i>
+                <a href="${resource.url}" target="_blank">${resource.name}</a>
+            </li>
+        `;
+    });
+
+    resourcesHtml += '</ul>';
+    resourcesList.innerHTML = resourcesHtml;
+}
+
+// Load and display discussion thread
+function loadDiscussion(moduleId, lessonId) {
+    const discussionThread = document.getElementById('discussion-thread');
+    const newComment = document.getElementById('new-comment');
+
+    if (!discussionThread || !appData.courseDiscussions[moduleId]) return;
+
+    const comments = appData.courseDiscussions[moduleId].filter(comment => comment.lessonId === lessonId);
+    let commentsHtml = '<div class="comments-list">';
+
+    comments.forEach(comment => {
+        commentsHtml += `
+            <div class="comment-item">
+                <div class="comment-header">
+                    <strong>${comment.userName}</strong>
+                    <span class="comment-time">${timeAgoString(comment.timestamp)}</span>
+                    <span class="comment-likes"><i class="fas fa-thumbs-up"></i> ${comment.likes}</span>
+                </div>
+                <p class="comment-content">${comment.content}</p>
+            </div>
+        `;
+    });
+
+    commentsHtml += '</div>';
+    discussionThread.innerHTML = commentsHtml;
+
+    // Set up post comment functionality
+    if (newComment && appData.currentUser) {
+        document.getElementById('post-comment').onclick = () => postComment(moduleId, lessonId);
+    }
+}
+
+// Post a new comment
+function postComment(moduleId, lessonId) {
+    const newComment = document.getElementById('new-comment');
+    const content = newComment.value.trim();
+
+    if (!content || !appData.currentUser) return;
+
+    const comment = {
+        id: Date.now(),
+        lessonId: lessonId,
+        userId: appData.currentUser.id,
+        userName: appData.currentUser.name,
+        content: content,
+        timestamp: new Date().toISOString(),
+        likes: 0
+    };
+
+    if (!appData.courseDiscussions[moduleId]) {
+        appData.courseDiscussions[moduleId] = [];
+    }
+
+    appData.courseDiscussions[moduleId].push(comment);
+    saveData();
+
+    // Clear the input and reload the discussion
+    newComment.value = '';
+    loadDiscussion(moduleId, lessonId);
+}
+
+// Load lesson notes
+function loadLessonNotes(moduleId, lessonId) {
+    const notesTextarea = document.getElementById('lesson-notes');
+    const key = `notes-${moduleId}-${lessonId}`;
+
+    if (notesTextarea && appData.currentUser) {
+        const savedNotes = appData.currentUser.notes ? appData.currentUser.notes[key] : '';
+        notesTextarea.value = savedNotes || '';
+
+        // Set up save functionality
+        document.getElementById('save-notes').onclick = () => saveLessonNotes(moduleId, lessonId);
+    }
+}
+
+// Save lesson notes
+function saveLessonNotes(moduleId, lessonId) {
+    const notesTextarea = document.getElementById('lesson-notes');
+    const key = `notes-${moduleId}-${lessonId}`;
+
+    if (notesTextarea && appData.currentUser) {
+        if (!appData.currentUser.notes) {
+            appData.currentUser.notes = {};
+        }
+
+        appData.currentUser.notes[key] = notesTextarea.value;
+        saveData();
+
+        alert('Notes saved successfully!');
+    }
+}
+
+// Show resources section
+function showResourcesSection() {
+    const lessonContent = document.getElementById('lesson-content');
+    const quizSection = document.getElementById('quiz-section');
+    const resourcesSection = document.getElementById('resources-section');
+    const discussionSection = document.getElementById('discussion-section');
+    const notesSection = document.getElementById('notes-section');
+
+    lessonContent.style.display = 'none';
+    quizSection.style.display = 'none';
+    discussionSection.style.display = 'none';
+    notesSection.style.display = 'none';
+    resourcesSection.style.display = 'block';
+}
+
+// Show discussion section
+function showDiscussionSection() {
+    const lessonContent = document.getElementById('lesson-content');
+    const quizSection = document.getElementById('quiz-section');
+    const resourcesSection = document.getElementById('resources-section');
+    const discussionSection = document.getElementById('discussion-section');
+    const notesSection = document.getElementById('notes-section');
+
+    lessonContent.style.display = 'none';
+    quizSection.style.display = 'none';
+    resourcesSection.style.display = 'none';
+    notesSection.style.display = 'none';
+    discussionSection.style.display = 'block';
+}
+
+// Show notes section
+function showNotesSection() {
+    const lessonContent = document.getElementById('lesson-content');
+    const quizSection = document.getElementById('quiz-section');
+    const resourcesSection = document.getElementById('resources-section');
+    const discussionSection = document.getElementById('discussion-section');
+    const notesSection = document.getElementById('notes-section');
+
+    lessonContent.style.display = 'none';
+    quizSection.style.display = 'none';
+    resourcesSection.style.display = 'none';
+    discussionSection.style.display = 'none';
+    notesSection.style.display = 'block';
 }
 
 // Update lesson navigation buttons
@@ -1343,12 +1660,17 @@ function updateLessonNavigation(module, lessonIndex) {
     const nextBtn = document.getElementById('next-lesson');
     const completeBtn = document.getElementById('complete-lesson');
     const quizSection = document.getElementById('quiz-section');
-    
+
+    // Resources, discussion, and notes buttons
+    const showResourcesBtn = document.getElementById('show-resources');
+    const showDiscussionBtn = document.getElementById('show-discussion');
+    const showNotesBtn = document.getElementById('show-notes');
+
     if (prevBtn) {
         prevBtn.style.display = lessonIndex > 0 ? 'inline-block' : 'none';
         prevBtn.onclick = () => showLessonContent(module, lessonIndex - 1);
     }
-    
+
     if (nextBtn) {
         // If this is the last lesson, next button should show quiz (if exists) or nothing
         if (lessonIndex < module.lessons.length - 1) {
@@ -1374,7 +1696,7 @@ function updateLessonNavigation(module, lessonIndex) {
             };
         }
     }
-    
+
     if (completeBtn) {
         if (quizSection && quizSection.style.display !== 'none') {
             completeBtn.textContent = 'Submit Quiz';
@@ -1383,6 +1705,19 @@ function updateLessonNavigation(module, lessonIndex) {
             completeBtn.textContent = 'Complete Lesson';
             completeBtn.onclick = () => markLessonComplete(module, lessonIndex);
         }
+    }
+
+    // Set up additional section buttons
+    if (showResourcesBtn) {
+        showResourcesBtn.onclick = showResourcesSection;
+    }
+
+    if (showDiscussionBtn) {
+        showDiscussionBtn.onclick = showDiscussionSection;
+    }
+
+    if (showNotesBtn) {
+        showNotesBtn.onclick = showNotesSection;
     }
 }
 
@@ -1697,11 +2032,17 @@ function setupAdminDashboard() {
     document.getElementById('add-module-btn')?.addEventListener('click', function() {
         alert('In a real implementation, this would open a form to add a new module.');
     });
-    
+
     // Search users
     document.getElementById('search-users')?.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
         filterUsers(searchTerm);
+    });
+
+    // Add to wishlist button in dashboard
+    document.getElementById('add-to-wishlist')?.addEventListener('click', function() {
+        // In a real implementation, this would add a selected course to the wishlist
+        alert('In a real implementation, this would open a dialog to select a course to add to your wishlist.');
     });
 }
 

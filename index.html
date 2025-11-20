@@ -263,6 +263,26 @@
                         </div>
                     </div>
 
+                    <div class="course-sections">
+                        <div class="section-header">
+                            <h3>Your Courses</h3>
+                            <a href="#" class="nav-link" data-page="courses">Browse More Courses</a>
+                        </div>
+                        <div id="modules-container">
+                            <!-- Modules will be loaded dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="wishlist-section">
+                        <div class="section-header">
+                            <h3>Wishlist</h3>
+                            <button id="add-to-wishlist" class="cta-button primary">Add Course</button>
+                        </div>
+                        <div id="wishlist-container">
+                            <!-- Wishlist items will be loaded here -->
+                        </div>
+                    </div>
+
                     <div class="recent-activity">
                         <h3>Recent Activity</h3>
                         <div class="activity-list">
@@ -327,6 +347,37 @@
                             <!-- Quiz content will be loaded here -->
                         </div>
 
+                        <div id="resources-section" style="display:none;">
+                            <h3>Course Resources</h3>
+                            <div id="resources-list">
+                                <!-- Resources will be loaded here -->
+                            </div>
+                        </div>
+
+                        <div id="discussion-section" style="display:none;">
+                            <h3>Discussion Forum</h3>
+                            <div id="discussion-thread">
+                                <!-- Discussion posts will be loaded here -->
+                            </div>
+                            <div class="add-comment">
+                                <textarea id="new-comment" placeholder="Add a comment or ask a question..."></textarea>
+                                <button id="post-comment" class="cta-button primary">Post Comment</button>
+                            </div>
+                        </div>
+
+                        <div id="notes-section" style="display:none;">
+                            <h3>My Notes</h3>
+                            <textarea id="lesson-notes" placeholder="Take notes here..."></textarea>
+                            <button id="save-notes" class="cta-button primary">Save Notes</button>
+                        </div>
+
+                        <div id="bookmarks-section" style="display:none;">
+                            <h3>Bookmarks</h3>
+                            <div id="bookmarks-list">
+                                <!-- Bookmarks will be loaded here -->
+                            </div>
+                        </div>
+
                         <div class="module-navigation">
                             <button id="prev-lesson" class="nav-btn secondary">
                                 <i class="fas fa-arrow-left"></i> Previous
@@ -336,6 +387,15 @@
                             </button>
                             <button id="next-lesson" class="nav-btn">
                                 Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <button id="show-resources" class="nav-btn secondary">
+                                <i class="fas fa-download"></i> Resources
+                            </button>
+                            <button id="show-discussion" class="nav-btn secondary">
+                                <i class="fas fa-comments"></i> Discussion
+                            </button>
+                            <button id="show-notes" class="nav-btn secondary">
+                                <i class="fas fa-sticky-note"></i> My Notes
                             </button>
                         </div>
                     </div>
