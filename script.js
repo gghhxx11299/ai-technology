@@ -6,28 +6,28 @@ const DATA_KEY = 'aiCourseData';
 document.addEventListener('DOMContentLoaded', function() {
     // Load initial data
     loadData();
-    
+
     // Set up navigation
     setupNavigation();
-    
+
     // Set up authentication
     setupAuthentication();
-    
+
     // Set up student dashboard
     setupStudentDashboard();
-    
+
     // Set up admin dashboard
     setupAdminDashboard();
-    
+
     // Set up module detail view
     setupModuleDetailView();
-    
+
     // Set up certificate view
     setupCertificateView();
-    
+
     // Set up courses page
     setupCoursesPage();
-    
+
     // Check current authentication status
     checkAuthStatus();
 });
@@ -686,7 +686,7 @@ function loadData() {
         const parsedData = JSON.parse(savedData);
         appData = {...appData, ...parsedData};
     }
-    
+
     // Also load the course content if it exists
     const savedCourse = localStorage.getItem('aiCourseContent');
     if (savedCourse) {
@@ -712,7 +712,7 @@ function setupNavigation() {
             }
         });
     });
-    
+
     // CTA button on home page
     document.getElementById('get-started-btn')?.addEventListener('click', function() {
         showPage('signup');
@@ -725,21 +725,21 @@ function showPage(pageId) {
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
     });
-    
+
     // Show requested page
     document.getElementById(pageId).classList.add('active');
-    
+
     // Update active nav link
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
     });
-    
+
     // Find the nav link that corresponds to this page and activate it
     const navLink = document.querySelector(`[data-page="${pageId}"]`);
     if (navLink) {
         navLink.classList.add('active');
     }
-    
+
     // Special handling for certain pages
     if (pageId === 'student-dashboard' && appData.currentUser) {
         loadStudentDashboard();
@@ -762,29 +762,29 @@ function setupAuthentication() {
     if (signupForm) {
         signupForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const fullName = document.getElementById('full-name').value;
             const email = document.getElementById('signup-email').value;
             const password = document.getElementById('signup-password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
-            
+
             if (password !== confirmPassword) {
                 alert('Passwords do not match!');
                 return;
             }
-            
+
             if (password.length < 6) {
                 alert('Password must be at least 6 characters long!');
                 return;
             }
-            
+
             // Check if user already exists
             const existingUser = appData.students.find(student => student.email === email);
             if (existingUser) {
                 alert('A user with this email already exists!');
                 return;
             }
-            
+
             // Create new user
             const newUser = {
                 id: Date.now(),
@@ -799,10 +799,10 @@ function setupAuthentication() {
                 lastAccess: new Date().toISOString(),
                 enrolledCourses: [1, 2, 3] // All courses initially
             };
-            
+
             appData.students.push(newUser);
             appData.currentUser = newUser;
-            
+
             // Add to recent activity
             appData.recentActivity.push({
                 id: Date.now(),
@@ -810,36 +810,36 @@ function setupAuthentication() {
                 action: 'Account created',
                 timestamp: new Date().toISOString()
             });
-            
+
             saveData();
-            
+
             // Update UI
             updateAuthUI();
             showPage('student-dashboard');
-            
+
             // Reset form
             signupForm.reset();
         });
     }
-    
+
     // Login form
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
-            
+
             // Find user
-            const user = appData.students.find(student => 
+            const user = appData.students.find(student =>
                 student.email === email && student.password === password
             );
-            
+
             if (user) {
                 appData.currentUser = user;
                 user.lastAccess = new Date().toISOString();
-                
+
                 // Add to recent activity
                 appData.recentActivity.push({
                     id: Date.now(),
@@ -847,12 +847,12 @@ function setupAuthentication() {
                     action: 'Login',
                     timestamp: new Date().toISOString()
                 });
-                
+
                 saveData();
-                
+
                 // Update UI
                 updateAuthUI();
-                
+
                 // Check if it's admin login
                 if (email === 'admin@aitutorials.com') {
                     appData.currentAdmin = { email: email };
@@ -864,12 +864,12 @@ function setupAuthentication() {
             } else {
                 alert('Invalid email or password!');
             }
-            
+
             // Reset form
             loginForm.reset();
         });
     }
-    
+
     // Auth button (login/signup toggle)
     document.getElementById('auth-btn')?.addEventListener('click', function() {
         if (appData.currentUser) {
@@ -883,18 +883,18 @@ function setupAuthentication() {
             showPage('login');
         }
     });
-    
+
     // Switch between login and signup
     document.getElementById('show-login')?.addEventListener('click', function(e) {
         e.preventDefault();
         showPage('login');
     });
-    
+
     document.getElementById('show-signup')?.addEventListener('click', function(e) {
         e.preventDefault();
         showPage('signup');
     });
-    
+
     // Logout buttons
     document.getElementById('logout-btn')?.addEventListener('click', logout);
     document.getElementById('admin-logout-btn')?.addEventListener('click', adminLogout);
@@ -907,24 +907,24 @@ function updateAuthUI() {
     const adminLink = document.getElementById('admin-link');
     const userName = document.getElementById('user-name');
     const userEmail = document.getElementById('user-email');
-    
+
     if (appData.currentUser) {
         if (authBtn) {
             authBtn.innerHTML = '<i class="fas fa-user"></i> <span>Dashboard</span>';
         }
-        
+
         if (dashboardLink) {
             dashboardLink.style.display = 'inline-flex';
         }
-        
+
         if (userName) {
             userName.textContent = appData.currentUser.name.split(' ')[0];
         }
-        
+
         if (userEmail) {
             userEmail.textContent = appData.currentUser.email;
         }
-        
+
         // Show admin link if user is admin
         if (appData.currentUser.email === 'admin@aitutorials.com') {
             if (adminLink) {
@@ -935,11 +935,11 @@ function updateAuthUI() {
         if (authBtn) {
             authBtn.innerHTML = '<i class="fas fa-user"></i> <span>Login</span>';
         }
-        
+
         if (dashboardLink) {
             dashboardLink.style.display = 'none';
         }
-        
+
         if (adminLink) {
             adminLink.style.display = 'none';
         }
@@ -951,7 +951,7 @@ function checkAuthStatus() {
     // Check if we have a current user
     if (appData.currentUser) {
         updateAuthUI();
-        
+
         // Check if user is on a protected page
         const currentPage = document.querySelector('.page.active');
         if (currentPage && currentPage.id === 'home') {
@@ -962,7 +962,7 @@ function checkAuthStatus() {
                 showPage('student-dashboard');
             }
         }
-        
+
         // If on certificate page, check if user can access it
         if (currentPage && currentPage.id === 'certificate') {
             checkCertificateAvailability();
@@ -1025,13 +1025,13 @@ function loadStudentDashboard() {
 // Calculate and display progress
 function calculateAndDisplayProgress() {
     if (!appData.currentUser) return;
-    
+
     const user = appData.currentUser;
-    
+
     // Count total lessons and completed lessons
     let totalLessons = 0;
     let completedLessons = 0;
-    
+
     courseData.modules.forEach(module => {
         module.lessons.forEach(lesson => {
             totalLessons++;
@@ -1039,7 +1039,7 @@ function calculateAndDisplayProgress() {
                 completedLessons++;
             }
         });
-        
+
         // Count quiz if exists
         if (module.quiz) {
             totalLessons++;
@@ -1048,36 +1048,36 @@ function calculateAndDisplayProgress() {
             }
         }
     });
-    
+
     const progressPercentage = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
     user.progress = progressPercentage;
-    
+
     // Update progress bar
     const progressFill = document.getElementById('overall-progress');
     const progressText = document.getElementById('progress-text');
-    
+
     if (progressFill) progressFill.style.width = `${progressPercentage}%`;
     if (progressText) progressText.textContent = `${progressPercentage}% Complete`;
-    
+
     saveData();
 }
 
 // Load dashboard stats
 function loadDashboardStats() {
     if (!appData.currentUser) return;
-    
+
     const user = appData.currentUser;
-    
+
     // Calculate completed modules
     const completedModules = user.completedModules.length;
     const totalModules = courseData.modules.length;
-    
+
     document.getElementById('completed-modules').textContent = `${completedModules}/${totalModules}`;
-    
+
     // Calculate completed lessons
     let totalLessons = 0;
     let completedLessons = 0;
-    
+
     courseData.modules.forEach(module => {
         module.lessons.forEach(lesson => {
             totalLessons++;
@@ -1086,9 +1086,9 @@ function loadDashboardStats() {
             }
         });
     });
-    
+
     document.getElementById('completed-lessons').textContent = `${completedLessons}/${totalLessons}`;
-    
+
     // Calculate average quiz score
     if (user.quizScores && Object.keys(user.quizScores).length > 0) {
         const scores = Object.values(user.quizScores);
@@ -1300,21 +1300,21 @@ function removeFromWishlist(moduleId) {
 function loadRecentActivity() {
     const activityContainer = document.getElementById('recent-activity');
     if (!activityContainer || !appData.currentUser) return;
-    
+
     // Get recent activity for this user
     const userActivities = appData.recentActivity
         .filter(activity => activity.userId === appData.currentUser.id)
         .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
         .slice(0, 5);
-    
+
     activityContainer.innerHTML = '';
-    
+
     userActivities.forEach(activity => {
         const activityItem = document.createElement('div');
         activityItem.className = 'activity-item';
-        
+
         const timeAgo = timeAgoString(activity.timestamp);
-        
+
         activityItem.innerHTML = `
             <i class="fas fa-${getActivityIcon(activity.action)}"></i>
             <div>
@@ -1322,10 +1322,10 @@ function loadRecentActivity() {
                 <span>${timeAgo}</span>
             </div>
         `;
-        
+
         activityContainer.appendChild(activityItem);
     });
-    
+
     if (userActivities.length === 0) {
         activityContainer.innerHTML = '<p>No recent activity</p>';
     }
@@ -1354,7 +1354,7 @@ function timeAgoString(dateString) {
     const date = new Date(dateString);
     const now = new Date();
     const diffInSeconds = Math.floor((now - date) / 1000);
-    
+
     if (diffInSeconds < 60) return 'Just now';
     if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
     if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
@@ -1365,16 +1365,16 @@ function timeAgoString(dateString) {
 function showModuleDetail(moduleId) {
     const module = courseData.modules.find(m => m.id == moduleId);
     if (!module || !appData.currentUser) return;
-    
+
     // Update module title
     document.getElementById('module-title').textContent = module.title;
-    
+
     // Update module outline
     updateModuleOutline(module);
-    
+
     // Show current lesson (start with first incomplete, or first if none completed)
     let currentLessonIndex = 0;
-    
+
     // Find first incomplete lesson
     for (let i = 0; i < module.lessons.length; i++) {
         if (!appData.currentUser.modulesProgress[`${module.id}-${module.lessons[i].id}`]) {
@@ -1382,13 +1382,13 @@ function showModuleDetail(moduleId) {
             break;
         }
     }
-    
+
     // Show lesson content
     showLessonContent(module, currentLessonIndex);
-    
+
     // Update module progress display
     updateModuleProgressDisplay(module);
-    
+
     // Show the module detail page
     showPage('module-detail');
 }
@@ -1397,19 +1397,19 @@ function showModuleDetail(moduleId) {
 function updateModuleOutline(module) {
     const outlineContainer = document.getElementById('module-outline-content');
     if (!outlineContainer) return;
-    
+
     let outlineHtml = '<ul>';
-    
+
     module.lessons.forEach((lesson, index) => {
         const isCompleted = appData.currentUser.modulesProgress[`${module.id}-${lesson.id}`];
         const isActive = (
-            appData.currentUser.currentModule === module.id && 
+            appData.currentUser.currentModule === module.id &&
             appData.currentUser.currentLesson === lesson.id
         );
-        
+
         outlineHtml += `
             <li>
-                <a href="#" class="${isCompleted ? 'completed' : isActive ? 'active' : ''}" 
+                <a href="#" class="${isCompleted ? 'completed' : isActive ? 'active' : ''}"
                    data-lesson-index="${index}">
                     <i class="fas fa-${isCompleted ? 'check-circle' : isActive ? 'play-circle' : 'circle'}"></i>
                     ${lesson.title}
@@ -1417,7 +1417,7 @@ function updateModuleOutline(module) {
             </li>
         `;
     });
-    
+
     if (module.quiz) {
         const quizCompleted = appData.currentUser.modulesProgress[`quiz-${module.id}`];
         outlineHtml += `
@@ -1429,10 +1429,10 @@ function updateModuleOutline(module) {
             </li>
         `;
     }
-    
+
     outlineHtml += '</ul>';
     outlineContainer.innerHTML = outlineHtml;
-    
+
     // Add event listeners for lesson navigation
     document.querySelectorAll('#module-outline-content a[data-lesson-index]').forEach(link => {
         link.addEventListener('click', function(e) {
@@ -1441,7 +1441,7 @@ function updateModuleOutline(module) {
             showLessonContent(module, lessonIndex);
         });
     });
-    
+
     // Add event listener for quiz
     document.querySelectorAll('#module-outline-content a[data-quiz]').forEach(link => {
         link.addEventListener('click', function(e) {
@@ -1462,6 +1462,10 @@ function showLessonContent(module, lessonIndex) {
 
     if (lessonContent) {
         lessonContent.innerHTML = lesson.content;
+
+        // After inserting the content, ensure video containers are properly positioned
+        ensureVideoContainersPositioned();
+
         quizSection.style.display = 'none';
         resourcesSection.style.display = 'none';
         discussionSection.style.display = 'none';
@@ -1724,10 +1728,10 @@ function updateLessonNavigation(module, lessonIndex) {
 // Mark lesson as complete
 function markLessonComplete(module, lessonIndex) {
     if (!appData.currentUser) return;
-    
+
     const lesson = module.lessons[lessonIndex];
     appData.currentUser.modulesProgress[`${module.id}-${lesson.id}`] = true;
-    
+
     // Add to recent activity
     appData.recentActivity.push({
         id: Date.now(),
@@ -1735,7 +1739,7 @@ function markLessonComplete(module, lessonIndex) {
         action: `Lesson completed: ${lesson.title}`,
         timestamp: new Date().toISOString()
     });
-    
+
     // Check if all lessons in module are complete
     let allLessonsComplete = true;
     module.lessons.forEach(lesson => {
@@ -1743,12 +1747,12 @@ function markLessonComplete(module, lessonIndex) {
             allLessonsComplete = false;
         }
     });
-    
+
     // If all lessons complete and no quiz or quiz already taken, mark module as complete
     if (allLessonsComplete && (!module.quiz || appData.currentUser.modulesProgress[`quiz-${module.id}`])) {
         if (!appData.currentUser.completedModules.includes(module.id)) {
             appData.currentUser.completedModules.push(module.id);
-            
+
             // Add to recent activity
             appData.recentActivity.push({
                 id: Date.now(),
@@ -1758,14 +1762,14 @@ function markLessonComplete(module, lessonIndex) {
             });
         }
     }
-    
+
     // Update progress
     calculateAndDisplayProgress();
     loadDashboardStats();
     updateModuleProgressDisplay(module);
     updateModuleOutline(module);
     loadRecentActivity();
-    
+
     // Move to next lesson if available
     if (lessonIndex < module.lessons.length - 1) {
         showLessonContent(module, lessonIndex + 1);
@@ -1777,31 +1781,31 @@ function markLessonComplete(module, lessonIndex) {
         alert(`Congratulations! You've completed the "${module.title}" module.`);
         showPage('student-dashboard');
     }
-    
+
     saveData();
 }
 
 // Show module quiz
 function showModuleQuiz(module) {
     if (!appData.currentUser) return;
-    
+
     const quizSection = document.getElementById('quiz-section');
     const lessonContent = document.getElementById('lesson-content');
-    
+
     if (!quizSection) return;
-    
+
     let quizHtml = `
         <h3>Module Quiz: ${module.title}</h3>
         <div id="quiz-form">
     `;
-    
+
     module.quiz.questions.forEach((question, index) => {
         quizHtml += `
             <div class="quiz-question">
                 <p><strong>Question ${index + 1}:</strong> ${question.question}</p>
                 <div class="quiz-options">
         `;
-        
+
         question.options.forEach((option, optIndex) => {
             quizHtml += `
                 <div class="quiz-option">
@@ -1810,19 +1814,19 @@ function showModuleQuiz(module) {
                 </div>
             `;
         });
-        
+
         quizHtml += `
                 </div>
             </div>
         `;
     });
-    
+
     quizHtml += `</div>`;
-    
+
     quizSection.innerHTML = quizHtml;
     lessonContent.style.display = 'none';
     quizSection.style.display = 'block';
-    
+
     // Update navigation buttons
     updateLessonNavigation(module, module.lessons.length - 1);
 }
@@ -1830,7 +1834,7 @@ function showModuleQuiz(module) {
 // Submit quiz
 function submitQuiz(module) {
     if (!appData.currentUser) return;
-    
+
     // Collect answers
     const answers = [];
     module.quiz.questions.forEach((question, index) => {
@@ -1841,12 +1845,12 @@ function submitQuiz(module) {
             answers.push(null);
         }
     });
-    
+
     if (answers.some(ans => ans === null)) {
         alert('Please answer all questions before submitting.');
         return;
     }
-    
+
     // Grade quiz
     let correctCount = 0;
     module.quiz.questions.forEach((question, index) => {
@@ -1854,16 +1858,16 @@ function submitQuiz(module) {
             correctCount++;
         }
     });
-    
+
     const score = Math.round((correctCount / module.quiz.questions.length) * 100);
-    
+
     // Show results
     alert(`Quiz completed! You scored ${score}% (${correctCount}/${module.quiz.questions.length}) correct.`);
-    
+
     // Mark quiz as completed
     appData.currentUser.modulesProgress[`quiz-${module.id}`] = true;
     appData.currentUser.quizScores[`quiz-${module.id}`] = score;
-    
+
     // Add to recent activity
     appData.recentActivity.push({
         id: Date.now(),
@@ -1871,7 +1875,7 @@ function submitQuiz(module) {
         action: `Quiz completed: ${module.title} (Score: ${score}%)`,
         timestamp: new Date().toISOString()
     });
-    
+
     // Check if all lessons and quiz are complete
     let allLessonsComplete = true;
     module.lessons.forEach(lesson => {
@@ -1879,11 +1883,11 @@ function submitQuiz(module) {
             allLessonsComplete = false;
         }
     });
-    
+
     if (allLessonsComplete) {
         if (!appData.currentUser.completedModules.includes(module.id)) {
             appData.currentUser.completedModules.push(module.id);
-            
+
             // Add to recent activity
             appData.recentActivity.push({
                 id: Date.now(),
@@ -1892,27 +1896,27 @@ function submitQuiz(module) {
                 timestamp: new Date().toISOString()
             });
         }
-        
+
         // Check if all modules are completed for certificate
-        const allModulesComplete = courseData.modules.every(mod => 
+        const allModulesComplete = courseData.modules.every(mod =>
             appData.currentUser.completedModules.includes(mod.id)
         );
-        
+
         if (allModulesComplete) {
             // Issue certificate
             issueCertificate();
         }
     }
-    
+
     // Update progress
     calculateAndDisplayProgress();
     loadDashboardStats();
     updateModuleProgressDisplay(module);
     updateModuleOutline(module);
     loadRecentActivity();
-    
+
     saveData();
-    
+
     // Return to dashboard
     showPage('student-dashboard');
 }
@@ -1920,17 +1924,17 @@ function submitQuiz(module) {
 // Update module progress display
 function updateModuleProgressDisplay(module) {
     if (!appData.currentUser) return;
-    
+
     // Calculate module progress
     let totalItems = module.lessons.length;
     let completedItems = 0;
-    
+
     module.lessons.forEach(lesson => {
         if (appData.currentUser.modulesProgress[`${module.id}-${lesson.id}`]) {
             completedItems++;
         }
     });
-    
+
     // Count quiz if exists
     if (module.quiz) {
         totalItems++;
@@ -1938,9 +1942,9 @@ function updateModuleProgressDisplay(module) {
             completedItems++;
         }
     }
-    
+
     const moduleProgress = totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
-    
+
     const progressText = document.getElementById('module-progress-text');
     if (progressText) {
         progressText.textContent = `${moduleProgress}% Complete`;
@@ -1950,7 +1954,7 @@ function updateModuleProgressDisplay(module) {
 // Issue certificate
 function issueCertificate() {
     if (!appData.currentUser) return;
-    
+
     const certificate = {
         id: 'CERT-' + Date.now(),
         studentId: appData.currentUser.id,
@@ -1960,14 +1964,14 @@ function issueCertificate() {
         issueDate: new Date().toISOString().split('T')[0],
         completionDate: new Date().toISOString()
     };
-    
+
     appData.certificates.push(certificate);
-    
+
     // Update UI to show certificate
     document.getElementById('certificate-name').textContent = certificate.studentName;
     document.getElementById('completion-date').textContent = certificate.issueDate;
     document.getElementById('certificate-id').textContent = certificate.id;
-    
+
     // Add to recent activity
     appData.recentActivity.push({
         id: Date.now(),
@@ -1975,7 +1979,7 @@ function issueCertificate() {
         action: 'Certificate earned',
         timestamp: new Date().toISOString()
     });
-    
+
     saveData();
 }
 
@@ -2001,7 +2005,7 @@ function setupCertificateView() {
         // In a real implementation, this would generate a PDF
         alert('Certificate would be downloaded in a real implementation. For now, you can take a screenshot.');
     });
-    
+
     document.getElementById('share-certificate')?.addEventListener('click', function() {
         alert('Certificate sharing functionality would be implemented in a full application.');
     });
@@ -2013,13 +2017,13 @@ function setupAdminDashboard() {
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const tabId = this.getAttribute('data-tab');
-            
+
             // Update active tab button
             document.querySelectorAll('.tab-btn').forEach(b => {
                 b.classList.remove('active');
             });
             this.classList.add('active');
-            
+
             // Show selected tab content
             document.querySelectorAll('.tab-pane').forEach(pane => {
                 pane.classList.remove('active');
@@ -2027,7 +2031,7 @@ function setupAdminDashboard() {
             document.getElementById(`${tabId}-tab`).classList.add('active');
         });
     });
-    
+
     // Add module button
     document.getElementById('add-module-btn')?.addEventListener('click', function() {
         alert('In a real implementation, this would open a form to add a new module.');
@@ -2050,37 +2054,37 @@ function setupAdminDashboard() {
 function loadAdminDashboard() {
     // Update student statistics
     document.getElementById('total-students').textContent = appData.students.length;
-    
+
     // Calculate active students (accessed in last 30 days)
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-    
-    const activeStudents = appData.students.filter(student => 
+
+    const activeStudents = appData.students.filter(student =>
         new Date(student.lastAccess) > thirtyDaysAgo
     ).length;
-    
+
     document.getElementById('active-students').textContent = activeStudents;
-    
+
     // Calculate completion rate
     if (appData.students.length > 0) {
-        const completedStudents = appData.students.filter(student => 
-            courseData.modules.length > 0 && 
+        const completedStudents = appData.students.filter(student =>
+            courseData.modules.length > 0 &&
             student.completedModules.length === courseData.modules.length
         ).length;
-        
+
         const completionRate = Math.round((completedStudents / appData.students.length) * 100);
         document.getElementById('completion-rate').textContent = `${completionRate}%`;
-        
+
         // Update certificates issued
         document.getElementById('certificates-issued').textContent = appData.certificates.length;
     }
-    
+
     // Show recent activity
     loadRecentActivityAdmin();
-    
+
     // Load modules editor
     loadModulesEditor();
-    
+
     // Load users list
     loadUsersList();
 }
@@ -2089,19 +2093,19 @@ function loadAdminDashboard() {
 function loadRecentActivityAdmin() {
     const activityContainer = document.getElementById('recent-activity');
     if (!activityContainer) return;
-    
+
     // Get last 10 activities
     const recentActivities = [...appData.recentActivity]
         .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
         .slice(0, 10);
-    
+
     let activityHtml = '';
-    
+
     if (recentActivities.length > 0) {
         recentActivities.forEach(activity => {
             const student = appData.students.find(s => s.id === activity.userId);
             const timeAgo = timeAgoString(activity.timestamp);
-            
+
             activityHtml += `
                 <div class="activity-item">
                     <i class="fas fa-${getActivityIcon(activity.action)}"></i>
@@ -2115,7 +2119,7 @@ function loadRecentActivityAdmin() {
     } else {
         activityHtml = '<p>No recent activity</p>';
     }
-    
+
     activityContainer.innerHTML = activityHtml;
 }
 
@@ -2123,16 +2127,16 @@ function loadRecentActivityAdmin() {
 function loadModulesEditor() {
     const editorContainer = document.getElementById('modules-editor');
     if (!editorContainer) return;
-    
+
     let editorHtml = '';
-    
+
     courseData.modules.forEach(module => {
         // Calculate statistics for this module
         let totalLessons = 0;
         let completedLessons = 0;
         let totalQuizzes = 0;
         let completedQuizzes = 0;
-        
+
         appData.students.forEach(student => {
             module.lessons.forEach(lesson => {
                 totalLessons++;
@@ -2140,7 +2144,7 @@ function loadModulesEditor() {
                     completedLessons++;
                 }
             });
-            
+
             if (module.quiz) {
                 totalQuizzes++;
                 if (student.modulesProgress[`quiz-${module.id}`]) {
@@ -2148,10 +2152,10 @@ function loadModulesEditor() {
                 }
             }
         });
-        
+
         const lessonCompletionRate = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
         const quizCompletionRate = totalQuizzes > 0 ? Math.round((completedQuizzes / totalQuizzes) * 100) : 0;
-        
+
         editorHtml += `
             <div class="module-editor">
                 <div class="module-header">
@@ -2176,9 +2180,9 @@ function loadModulesEditor() {
             </div>
         `;
     });
-    
+
     editorContainer.innerHTML = editorHtml;
-    
+
     // Add event listeners for edit buttons
     document.querySelectorAll('.edit-module-btn').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -2197,19 +2201,19 @@ function loadUsersList() {
 function renderUsersList(users) {
     const usersContainer = document.getElementById('users-list');
     if (!usersContainer) return;
-    
+
     if (users.length > 0) {
         let usersHtml = '';
-        
+
         users.forEach(student => {
             // Calculate student stats
             const totalLessons = courseData.modules.reduce((sum, mod) => sum + mod.lessons.length, 0);
             const completedLessons = Object.keys(student.modulesProgress).filter(key => !key.startsWith('quiz-')).length;
             const progressPercentage = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
-            
+
             const completedModules = student.completedModules.length;
             const totalModules = courseData.modules.length;
-            
+
             usersHtml += `
                 <div class="user-card">
                     <div class="user-header">
@@ -2223,7 +2227,7 @@ function renderUsersList(users) {
                 </div>
             `;
         });
-        
+
         usersContainer.innerHTML = usersHtml;
     } else {
         usersContainer.innerHTML = '<p>No students found</p>';
@@ -2232,11 +2236,11 @@ function renderUsersList(users) {
 
 // Filter users by search term
 function filterUsers(searchTerm) {
-    const filteredUsers = appData.students.filter(student => 
-        student.name.toLowerCase().includes(searchTerm) || 
+    const filteredUsers = appData.students.filter(student =>
+        student.name.toLowerCase().includes(searchTerm) ||
         student.email.toLowerCase().includes(searchTerm)
     );
-    
+
     renderUsersList(filteredUsers);
 }
 
@@ -2253,4 +2257,25 @@ function checkShowCertificate() {
         // Show certificate page
         showPage('certificate');
     }
+}
+
+// Ensure video containers are properly positioned after content is loaded
+// This is particularly important for responsive YouTube embeds that use the padding-top hack
+function ensureVideoContainersPositioned() {
+    // Wait a brief moment to ensure the DOM is updated
+    setTimeout(function() {
+        const videoContainers = document.querySelectorAll('.video-container');
+        videoContainers.forEach(function(container) {
+            // The CSS should handle this, but let's make sure the iframe is properly positioned
+            const iframe = container.querySelector('iframe');
+            if (iframe) {
+                // Make sure the iframe is positioned absolutely within its container
+                iframe.style.position = 'absolute';
+                iframe.style.top = '0';
+                iframe.style.left = '0';
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+            }
+        });
+    }, 100); // Small delay to allow DOM rendering before positioning
 }
