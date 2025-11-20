@@ -1320,6 +1320,22 @@ body {
     background: linear-gradient(90deg, #4a6cf7, #6c63ff);
 }
 
+/* Course Preview Videos */
+.course-preview {
+    margin: 1rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 150px;
+}
+
+.course-preview iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
 /* Footer */
 footer {
     margin-top: 4rem;
