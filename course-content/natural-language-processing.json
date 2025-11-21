@@ -1,0 +1,303 @@
+{
+  "id": 4,
+  "title": "Natural Language Processing",
+  "description": "Learn how machines understand and process human language",
+  "duration": "2 weeks",
+  "chapters": [
+    {
+      "id": 1,
+      "title": "NLP Fundamentals",
+      "lessons": [
+        {
+          "id": 1,
+          "title": "What is Natural Language Processing?",
+          "content": `
+            <h3>Natural Language Processing (NLP)</h3>
+            <p>Natural Language Processing (NLP) is a field of artificial intelligence that focuses on the interaction between computers and humans through natural language. The ultimate objective of NLP is to enable computers to understand, interpret, and generate human language in a valuable way.</p>
+            <h4>Key Components of NLP:</h4>
+            <ul>
+              <li><strong>Speech Recognition:</strong> Converting spoken language to text</li>
+              <li><strong>Natural Language Understanding:</strong> Comprehending the meaning of text</li>
+              <li><strong>Natural Language Generation:</strong> Producing human-readable text from data</li>
+            </ul>
+            <h4>Applications:</h4>
+            <p>NLP powers virtual assistants, translation services, sentiment analysis, text summarization, and chatbots that we interact with daily.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: Introduction to NLP</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/8r-odErFgYk?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>Learn what Natural Language Processing is and how it works.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Historical Context</h4>
+              <p>NLP has its roots in the 1950s, with early work on machine translation. The field has evolved from rule-based approaches to statistical methods and now to deep learning techniques.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>NLP Applications in Daily Life</h4>
+              <p>Create a list of at least 5 NLP applications you use in daily life. For each, identify whether it's primarily focused on understanding or generation, and briefly explain how it works.</p>
+            </div>
+          `,
+          "completed": false
+        },
+        {
+          "id": 2,
+          "title": "NLP Preprocessing Techniques",
+          "content": `
+            <h3>Text Preprocessing in NLP</h3>
+            <p>Before text can be processed by NLP models, it must be cleaned and converted into a format that the model can understand. This preprocessing is crucial for model performance.</p>
+            <h4>Common Preprocessing Steps:</h4>
+            <ul>
+              <li><strong>Tokenization:</strong> Breaking text into individual words or subwords</li>
+              <li><strong>Lowercasing:</strong> Converting text to lowercase for consistency</li>
+              <li><strong>Stopword Removal:</strong> Removing common words like "the", "and", "is"</li>
+              <li><strong>Stemming/Lemmatization:</strong> Reducing words to their root forms</li>
+              <li><strong>Removing Special Characters:</strong> Cleaning up punctuation and symbols</li>
+            </ul>
+            <h4>Why Preprocessing Matters:</h4>
+            <p>Preprocessing helps reduce noise in the data and can improve model performance by focusing on meaningful content.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: Text Preprocessing</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/flN1_7x15Zs?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>Understand the importance of text preprocessing in NLP.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Tokenization Approaches</h4>
+              <p>Tokenization can happen at the word level, character level, or subword level. Each approach has advantages depending on the application. Subword tokenization (like BPE) is commonly used in modern models.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Text Preprocessing Exercise</h4>
+              <p>Take a paragraph of text and manually perform the preprocessing steps mentioned above. Compare the original text with the preprocessed version and note how the length and content change.</p>
+            </div>
+          `,
+          "completed": false
+        },
+        {
+          "id": 3,
+          "title": "Text Representations and Word Embeddings",
+          "content": `
+            <h3>Text Representations in NLP</h3>
+            <p>Computers need numerical representations of text to process it. There are several approaches to convert text into numerical vectors:</p>
+            <h4>Traditional Representations:</h4>
+            <ul>
+              <li><strong>Bag of Words (BoW):</strong> Represents text as a vector of word frequencies</li>
+              <li><strong>TF-IDF:</strong> Weighted approach that considers word frequency and rarity across documents</li>
+              <li><strong>One-hot Encoding:</strong> Binary representation of words</li>
+            </ul>
+            <h4>Modern Representations:</h4>
+            <p>Word embeddings like Word2Vec, GloVe, and FastText create dense vector representations that capture semantic relationships between words.</p>
+            <h4>Contextual Embeddings:</h4>
+            <p>Models like BERT create embeddings that depend on the context in which a word appears.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: Word Embeddings Explained</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/5PL0TmQhItY?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>Learn how word embeddings capture the meaning of words in numerical form.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Semantic Relationships</h4>
+              <p>With word embeddings, similar words have similar vector representations. This allows for operations like: king - man + woman ≈ queen, demonstrating how these embeddings capture semantic relationships.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Embedding Analysis</h4>
+              <p>Research and find examples of word embeddings capturing semantic relationships (like the king-man+woman example). Try to think of 3 more examples of your own and verify if they hold true in available word embedding models.</p>
+            </div>
+          `,
+          "completed": false
+        }
+      ],
+      "quiz": {
+        "questions": [
+          {
+            "question": "What is the main goal of Natural Language Processing?",
+            "options": ["To translate text", "To enable computers to understand and process human language", "To create robots", "To generate speech"],
+            "correct": 1,
+            "explanation": "The main goal of NLP is to enable computers to understand, interpret, and generate human language in a valuable way."
+          },
+          {
+            "question": "What does tokenization in NLP refer to?",
+            "options": ["Removing punctuation", "Converting text to lowercase", "Breaking text into individual words or subwords", "Removing stop words"],
+            "correct": 2,
+            "explanation": "Tokenization is the process of breaking text into individual words, phrases, or other meaningful elements called tokens."
+          },
+          {
+            "question": "Which of these is a traditional text representation method?",
+            "options": ["Word2Vec", "FastText", "TF-IDF", "BERT"],
+            "correct": 2,
+            "explanation": "TF-IDF (Term Frequency-Inverse Document Frequency) is a traditional text representation method, while the others are modern embedding techniques."
+          },
+          {
+            "question": "What do word embeddings like Word2Vec accomplish?",
+            "options": ["They remove stop words", "They create dense vector representations capturing semantic relationships", "They translate text", "They generate speech"],
+            "correct": 1,
+            "explanation": "Word embeddings create dense vector representations that capture semantic relationships between words, allowing similar words to have similar vector representations."
+          }
+        ],
+        "completed": false,
+        "score": 0
+      },
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "Advanced NLP Applications",
+      "lessons": [
+        {
+          "id": 1,
+          "title": "Language Models and Transformers",
+          "content": `
+            <h3>Language Models and Transformers</h3>
+            <p>Modern NLP has been revolutionized by transformer architectures, particularly models like BERT, GPT, and their variants.</p>
+            <h4>Language Models:</h4>
+            <p>These models predict the probability of sequences of words. They can be used to generate text, answer questions, and more.</p>
+            <h4>Transformer Architecture:</h4>
+            <p>Introduced in the paper "Attention Is All You Need", transformers use attention mechanisms to process input and output sequences in parallel.</p>
+            <h4>Transformer Applications:</h4>
+            <ul>
+              <li><strong>BERT:</strong> Bidirectional Encoder Representations from Transformers, excels at understanding contexts</li>
+              <li><strong>GPT:</strong> Generative Pre-trained Transformer, excels at text generation</li>
+              <li><strong>T5:</strong> Text-to-Text Transfer Transformer</li>
+            </ul>
+
+            <div class="video-section">
+              <h4>Recommended Video: Transformers Explained</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/TQQlZhbC5ps?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>Understand how transformer models revolutionized natural language processing.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Self-Attention Mechanism</h4>
+              <p>The self-attention mechanism allows the model to weigh the importance of different words in a sentence when processing each word, enabling it to capture long-range dependencies.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Transformer Models Comparison</h4>
+              <p>Research and compare the differences between BERT and GPT models. Focus on their architecture, training objectives, and primary use cases.</p>
+            </div>
+          `,
+          "completed": false
+        },
+        {
+          "id": 2,
+          "title": "NLP Applications in the Real World",
+          "content": `
+            <h3>Real-World NLP Applications</h3>
+            <p>NLP has numerous applications across various industries that impact our daily lives:</p>
+            <h4>Customer Service:</h4>
+            <p>Chatbots and virtual assistants handle customer inquiries automatically, providing 24/7 support.</p>
+            <h4>Healthcare:</h4>
+            <p>NLP helps analyze medical records, research papers, and clinical notes to assist in diagnosis and treatment.</p>
+            <h4>Finance:</h4>
+            <p>Automated analysis of financial news, earnings calls, and reports to inform investment decisions.</p>
+            <h4>Content Creation:</h4>
+            <p>Automated summarization, translation, and even content generation for marketing and media.</p>
+            <h4>Social Media:</h4>
+            <p>Sentiment analysis, content moderation, and recommendation systems.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: NLP in Industry</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/7Oy1N06CtPs?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>See how NLP is applied across different industries today.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Emerging Applications</h4>
+              <p>Emerging applications include legal document analysis, code generation with models like Codex, and real-time language translation that preserves speaker characteristics.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Industry Application Analysis</h4>
+              <p>Choose an industry (healthcare, finance, education, etc.) and identify 3 specific NLP applications that are transforming that industry. For each, describe the problem it solves and how it works.</p>
+            </div>
+          `,
+          "completed": false
+        },
+        {
+          "id": 3,
+          "title": "Ethical Considerations in NLP",
+          "content": `
+            <h3>Ethical Considerations in NLP</h3>
+            <p>As NLP systems become more powerful and pervasive, important ethical considerations arise:</p>
+            <h4>Bias in Language Models:</h4>
+            <p>NLP models can perpetuate societal biases present in their training data, leading to unfair or discriminatory outcomes.</p>
+            <h4>Privacy Concerns:</h4>
+            <p>Large language models trained on internet text may memorize private information present in their training data.</p>
+            <h4>Misinformation:</h4>
+            <p>Advanced text generation capabilities can be misused to create convincing fake content or deepfakes.</p>
+            <h4>Environmental Impact:</h4>
+            <p>Training large NLP models requires significant computational resources and energy.</p>
+            <h4>Accessibility:</h4>
+            <p>Most NLP research focuses on high-resource languages, potentially excluding speakers of less common languages.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: Ethics in AI and NLP</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/8IugQ8L4q0k?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>Learn about ethical challenges in NLP development and deployment.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Mitigation Strategies</h4>
+              <p>Researchers are developing techniques to identify and mitigate bias, improve privacy through techniques like differential privacy and federated learning, and create more efficient models to reduce environmental impact.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Ethical Analysis</h4>
+              <p>Choose one of the ethical challenges mentioned (bias, privacy, misinformation, etc.) and propose specific technical and non-technical solutions to address it in NLP systems.</p>
+            </div>
+          `,
+          "completed": false
+        }
+      ],
+      "quiz": {
+        "questions": [
+          {
+            "question": "What is a key innovation of the transformer architecture?",
+            "options": ["Recurrent connections", "Self-attention mechanism", "Convolutional layers", "Pooling operations"],
+            "correct": 1,
+            "explanation": "The transformer architecture introduced the self-attention mechanism, which allows the model to weigh the importance of different words in a sentence."
+          },
+          {
+            "question": "What is the primary difference between BERT and GPT?",
+            "options": ["BERT is larger", "BERT processes bidirectionally, GPT is unidirectional", "GPT uses attention", "No difference"],
+            "correct": 1,
+            "explanation": "BERT processes text bidirectionally (looking at context from both directions) while GPT processes text unidirectionally (left to right)."
+          },
+          {
+            "question": "Which ethical concern is related to NLP models potentially perpetuating societal biases?",
+            "options": ["Privacy concerns", "Bias and fairness", "Environmental impact", "Accessibility"],
+            "correct": 1,
+            "explanation": "Bias and fairness is the ethical concern related to NLP models perpetuating societal biases present in their training data."
+          },
+          {
+            "question": "True or False: NLP models can memorize private information from their training data.",
+            "options": ["True", "False"],
+            "correct": 0,
+            "explanation": "Yes, large language models trained on internet text may memorize private information present in their training data, raising privacy concerns."
+          }
+        ],
+        "completed": false,
+        "score": 0
+      },
+      "completed": false
+    }
+  ],
+  "completed": false
+}

@@ -1,0 +1,317 @@
+{
+  "id": 2,
+  "title": "Machine Learning Fundamentals",
+  "description": "Understanding the core concepts of Machine Learning and its applications",
+  "duration": "3 weeks",
+  "chapters": [
+    {
+      "id": 1,
+      "title": "Machine Learning Basics",
+      "lessons": [
+        {
+          "id": 1,
+          "title": "How Machine Learning Works",
+          "content": `
+            <h3>How Machine Learning Works</h3>
+            <p>Machine Learning (ML) is a subset of Artificial Intelligence that provides systems the ability to automatically learn and improve from experience without being explicitly programmed. The core idea is to develop algorithms that can access data and use it to learn for themselves.</p>
+            <h4>Core Concepts:</h4>
+            <ul>
+              <li><strong>Training Data:</strong> Historical data used to train the model</li>
+              <li><strong>Features:</strong> Input variables that the model uses to make predictions</li>
+              <li><strong>Labels:</strong> Output variables that the model predicts</li>
+              <li><strong>Model:</strong> The mathematical representation that makes predictions</li>
+            </ul>
+            <h4>Learning Process:</h4>
+            <p>Machine learning algorithms build a model based on training data in order to make data-driven predictions or decisions without being explicitly programmed to do so.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: Machine Learning Explained</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/3EgYAZxnaP0?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>Learn how machine learning works in simple terms with visual examples.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Historical Context</h4>
+              <p>Arthur Samuel, a pioneer in the field, coined the term "Machine Learning" in 1959. He defined it as "the field of study that gives computers the ability to learn without being explicitly programmed."</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Timeline Activity</h4>
+              <p>Create a visual timeline showing the major milestones in ML development, including the key people, innovations, and their impact. Highlight any interesting patterns or recurring themes in the evolution.</p>
+            </div>
+          `,
+          "completed": false
+        },
+        {
+          "id": 2,
+          "title": "Types of Learning",
+          "content": `
+            <h3>Types of Machine Learning</h3>
+            <p>There are three main types of machine learning, each with its own approach and use cases:</p>
+            <h4>Supervised Learning:</h4>
+            <ul>
+              <li>Uses labeled training data</li>
+              <li>Predicts outputs from input data</li>
+              <li>Examples: Classification, Regression</li>
+            </ul>
+            <h4>Unsupervised Learning:</h4>
+            <ul>
+              <li>Uses unlabeled data</li>
+              <li>Finds patterns in data</li>
+              <li>Examples: Clustering, Association rule learning</li>
+            </ul>
+            <h4>Reinforcement Learning:</h4>
+            <ul>
+              <li>Learns through rewards and penalties</li>
+              <li>Interacts with environment</li>
+              <li>Examples: Game playing, Robotics, Recommendation systems</li>
+            </ul>
+
+            <div class="video-section">
+              <h4>Recommended Video: Types of Machine Learning</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/5WcZeO4dwLA?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>Understand the differences between supervised, unsupervised, and reinforcement learning.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Real-World Examples</h4>
+              <p>Netflix uses supervised learning to predict what movies you might enjoy based on your viewing history. Google uses unsupervised learning to group similar search results. Game-playing AIs like AlphaGo use reinforcement learning to improve their gameplay through trial and error.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Categorization Exercise</h4>
+              <p>Find three different real-world applications of ML and categorize each as supervised, unsupervised, or reinforcement learning. Justify your categorization and research the specific algorithms typically used in each application.</p>
+            </div>
+          `,
+          "completed": false
+        },
+        {
+          "id": 3,
+          "title": "Common ML Algorithms",
+          "content": `
+            <h3>Common Machine Learning Algorithms</h3>
+            <p>Different algorithms are suited for different types of problems. Here are some of the most commonly used algorithms:</p>
+            <h4>Linear Regression:</h4>
+            <p>Used for predicting continuous values. Finds the best linear relationship between input features and target variable.</p>
+            <h4>Logistic Regression:</h4>
+            <p>Used for binary classification problems. Predicts probability of belonging to a class.</p>
+            <h4>Decision Trees:</h4>
+            <p>Creates a tree-like model of decisions. Easy to interpret and visualize.</p>
+            <h4>K-Means Clustering:</h4>
+            <p>Groups similar data points together. Used for market segmentation, image compression.</p>
+            <h4>Neural Networks:</h4>
+            <p>Computational models inspired by biological neural networks. Foundation of deep learning.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: Common ML Algorithms Explained</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/162rPcGg76c?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>Visual explanations of the most important machine learning algorithms.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Algorithm Selection</h4>
+              <p>The choice of algorithm depends on several factors: the size of the dataset, the type of data, the business requirements, and interpretability needs. Linear regression is simple and interpretable, while neural networks can model complex relationships but are harder to interpret.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Algorithm Comparison</h4>
+              <p>Create a decision matrix comparing different ML algorithms based on criteria like interpretability, performance on small datasets, ability to handle non-linear patterns, and computational requirements. Identify use cases for each algorithm.</p>
+            </div>
+          `,
+          "completed": false
+        }
+      ],
+      "quiz": {
+        "questions": [
+          {
+            "question": "What is Machine Learning?",
+            "options": ["A type of robot", "A subset of AI that learns from data", "A programming language", "A database system"],
+            "correct": 1,
+            "explanation": "Machine Learning is a subset of AI that focuses on building systems that learn from data without being explicitly programmed."
+          },
+          {
+            "question": "Which type of learning uses labeled training data?",
+            "options": ["Unsupervised Learning", "Reinforcement Learning", "Supervised Learning", "None of the above"],
+            "correct": 2,
+            "explanation": "Supervised learning uses labeled training data to make predictions on new data."
+          },
+          {
+            "question": "Personal Reflection: How might machine learning impact your daily life in the next 5 years?",
+            "options": ["More personalized recommendations", "Improved healthcare", "Increased automation", "All of the above"],
+            "correct": "any",
+            "explanation": "This is a personal reflection question about how ML might affect your life."
+          },
+          {
+            "question": "Which algorithm would be best for grouping customers with similar purchasing habits?",
+            "options": ["Linear Regression", "Logistic Regression", "K-Means Clustering", "Decision Tree"],
+            "correct": 2,
+            "explanation": "K-Means Clustering is used for grouping similar data points together without labels."
+          }
+        ],
+        "completed": false,
+        "score": 0
+      },
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "Data Processing and Model Evaluation",
+      "lessons": [
+        {
+          "id": 1,
+          "title": "Feature Engineering and Data Preprocessing",
+          "content": `
+            <h3>Feature Engineering and Data Preprocessing</h3>
+            <p>Data preprocessing and feature engineering are crucial steps in the machine learning pipeline that often determine the success of a model.</p>
+            <h4>Data Preprocessing Steps:</h4>
+            <ul>
+              <li><strong>Data Cleaning:</strong> Handling missing values, removing duplicates, identifying outliers</li>
+              <li><strong>Data Transformation:</strong> Normalization, scaling, encoding categorical variables</li>
+              <li><strong>Data Splitting:</strong> Dividing data into training, validation, and test sets</li>
+            </ul>
+            <h4>Feature Engineering:</h4>
+            <ul>
+              <li><strong>Feature Extraction:</strong> Creating new features from raw data</li>
+              <li><strong>Feature Selection:</strong> Choosing the most relevant features</li>
+              <li><strong>Feature Scaling:</strong> Normalizing features to similar ranges</li>
+            </ul>
+
+            <div class="video-section">
+              <h4>Recommended Video: Data Preprocessing for ML</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/hI5TJY2hC8s?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>Learn the importance of data preprocessing in machine learning projects.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Best Practices</h4>
+              <p>Always preprocess your data before training. Consider using techniques like cross-validation to ensure your model generalizes well. Pay special attention to data leakage which can lead to overly optimistic performance estimates.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Data Preprocessing Challenge</h4>
+              <p>Download a dataset from Kaggle or UCI Machine Learning Repository. Apply the preprocessing techniques mentioned in this lesson to prepare the data for machine learning. Document each preprocessing step and explain why you chose it.</p>
+            </div>
+          `,
+          "completed": false
+        },
+        {
+          "id": 2,
+          "title": "Model Evaluation Techniques",
+          "content": `
+            <h3>Evaluating Machine Learning Models</h3>
+            <p>Evaluation is crucial to ensure models perform well on new, unseen data. Different metrics are used for different types of problems.</p>
+            <h4>Classification Metrics:</h4>
+            <ul>
+              <li><strong>Accuracy:</strong> Percentage of correct predictions</li>
+              <li><strong>Precision:</strong> Proportion of positive predictions that were correct</li>
+              <li><strong>Recall:</strong> Proportion of actual positives that were identified</li>
+              <li><strong>F1-Score:</strong> Harmonic mean of precision and recall</li>
+            </ul>
+            <h4>Regression Metrics:</h4>
+            <ul>
+              <li><strong>Mean Absolute Error (MAE):</strong> Average absolute difference between predicted and actual values</li>
+              <li><strong>Mean Squared Error (MSE):</strong> Average squared difference between predicted and actual values</li>
+              <li><strong>R² Score:</strong> Proportion of variance explained by the model</li>
+            </ul>
+            <h4>Overfitting and Underfitting:</h4>
+            <p>Overfitting occurs when a model learns too much from training data and fails to generalize. Underfitting occurs when a model is too simple to capture the underlying pattern.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: Model Evaluation Techniques</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/lGySjH2pY6E?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>Learn how to properly evaluate machine learning models and avoid common pitfalls.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Cross-Validation</h4>
+              <p>Cross-validation is a technique to evaluate model performance by splitting data into multiple training and validation sets. K-fold cross-validation is a popular approach where the data is divided into k subsets, and the model is trained and validated k times, each time using a different subset as the validation set.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Model Evaluation Lab</h4>
+              <p>Train a simple model (like a decision tree) on a dataset. Evaluate it using multiple metrics and compare the results. Create a confusion matrix for classification tasks. Analyze whether your model is overfitting or underfitting.</p>
+            </div>
+          `,
+          "completed": false
+        },
+        {
+          "id": 3,
+          "title": "Advanced ML Concepts",
+          "content": `
+            <h3>Advanced Machine Learning Concepts</h3>
+            <p>As you progress in machine learning, you'll encounter more sophisticated techniques and concepts that can improve model performance.</p>
+            <h4>Ensemble Methods:</h4>
+            <p>Combining multiple models to improve overall performance. Examples include Random Forests and Gradient Boosting.</p>
+            <h4>Dimensionality Reduction:</h4>
+            <p>Techniques like Principal Component Analysis (PCA) to reduce the number of features while preserving important information.</p>
+            <h4>Hyperparameter Tuning:</h4>
+            <p>Finding the optimal parameters for your model using techniques like grid search or random search.</p>
+            <h4>Deep Learning:</h4>
+            <p>Using neural networks with multiple hidden layers to model complex patterns in data.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: Advanced ML Concepts</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/9p1H5yC8VvM?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>Explore advanced machine learning techniques and concepts.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Real-World Applications</h4>
+              <p>Advanced ML techniques power recommendation systems like those at Amazon and Netflix, fraud detection at banks, and image recognition systems. Ensemble methods often provide better performance than individual models.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Advanced Techniques Project</h4>
+              <p>Apply one of the advanced techniques (ensemble methods, PCA, or hyperparameter tuning) to a dataset of your choice. Compare the results with a basic model and document the improvements achieved.</p>
+            </div>
+          `,
+          "completed": false
+        }
+      ],
+      "quiz": {
+        "questions": [
+          {
+            "question": "What is overfitting in ML?",
+            "options": ["Model is too simple", "Model learns too much from training data", "Model has no training data", "Model is too fast"],
+            "correct": 1,
+            "explanation": "Overfitting occurs when a model learns the training data too well, including noise and outliers, and fails to generalize to new data."
+          },
+          {
+            "question": "True or False: In traditional programming, we input data and outputs to get programs.",
+            "options": ["True", "False"],
+            "correct": 1,
+            "explanation": "In traditional programming, we input data and programs to get outputs. In ML, we input data and outputs to get programs (models)."
+          },
+          {
+            "question": "What does the R² Score measure in regression?",
+            "options": ["Error rate", "Variance explained by the model", "Prediction accuracy", "Processing speed"],
+            "correct": 1,
+            "explanation": "R² Score measures the proportion of variance in the target variable that is explained by the model."
+          },
+          {
+            "question": "True or False: Cross-validation helps prevent overfitting.",
+            "options": ["True", "False"],
+            "correct": 0,
+            "explanation": "Cross-validation helps evaluate model performance and can indicate if a model is overfitting to the training data."
+          }
+        ],
+        "completed": false,
+        "score": 0
+      },
+      "completed": false
+    }
+  ],
+  "completed": false
+}

@@ -1,0 +1,304 @@
+{
+  "id": 1,
+  "title": "Introduction to AI",
+  "description": "Learn the fundamentals of Artificial Intelligence and its applications",
+  "duration": "2 weeks",
+  "chapters": [
+    {
+      "id": 1,
+      "title": "What is Artificial Intelligence?",
+      "lessons": [
+        {
+          "id": 1,
+          "title": "Definition and Core Concepts",
+          "content": `
+            <h3>What is Artificial Intelligence?</h3>
+            <p>Artificial Intelligence (AI) is intelligence demonstrated by machines, in contrast to the natural intelligence displayed by humans and animals. Leading AI textbooks define the field as the study of \"intelligent agents\": any device that perceives its environment and takes actions that maximize its chance of successfully achieving its goals.</p>
+            <p>AI research has been defined as the field of study of intelligent agents, which refers to any system that learns how to recognize its environment and takes actions that maximize its chance of success.</p>
+            <h4>Key Concepts:</h4>
+            <ul>
+              <li>Perception and reasoning</li>
+              <li>Learning from experience</li>
+              <li>Problem solving and decision making</li>
+              <li>Adaptation to new situations</li>
+            </ul>
+            <h4>Applications:</h4>
+            <p>AI is applied across numerous fields including healthcare, finance, transportation, and entertainment to solve complex problems and automate tasks.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: What is AI?</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/ad79nYk2keg?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>This video provides an excellent introduction to AI, explaining how machines can think and learn like humans.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Recommended Reading</h4>
+              <p>For a deeper understanding of AI concepts, read about the Turing Test and how it defines machine intelligence. The test, proposed by Alan Turing in 1950, evaluates a machine's ability to exhibit intelligent behavior equivalent to, or indistinguishable from, that of a human.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Thought Exercise</h4>
+              <p>Think about the AI systems you encounter in daily life. Create a list of these systems and identify which of the key concepts mentioned above they demonstrate. Consider how they perceive their environment, make decisions, and adapt.</p>
+            </div>
+          `,
+          "completed": false
+        },
+        {
+          "id": 2,
+          "title": "History and Evolution of AI",
+          "content": `
+            <h3>History and Evolution of AI</h3>
+            <p>The field of AI research was born at a Dartmouth College workshop in 1956. Attendees Allen Newell, Herbert Simon, John McCarthy, Marvin Minsky and Arthur Samuel became the founders and key contributors to the field.</p>
+            <h4>Key Milestones:</h4>
+            <ol>
+              <li><strong>1950s:</strong> Birth of AI research</li>
+              <li><strong>1960s-70s:</strong> Early optimism and the first AI "winter"</li>
+              <li><strong>1980s:</strong> Expert systems and revival</li>
+              <li><strong>1990s-2000s:</strong> Machine learning growth</li>
+              <li><strong>2010s-Present:</strong> Deep learning revolution</li>
+            </ol>
+            <h4>Modern Developments:</h4>
+            <p>Today's AI systems can recognize speech, images, and text with remarkable accuracy, play complex games at superhuman levels, and assist in scientific research across multiple domains.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: History of AI</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/yaL5ZMvRRqE?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>This video covers the fascinating history of AI development, from early concepts to modern breakthroughs.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Historical Context</h4>
+              <p>The Dartmouth Conference of 1956 is often cited as the birth of AI as a field. The proposal for the conference stated: "Every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it."</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Research Activity</h4>
+              <p>Research one of the early AI projects (like ELIZA, Shakey the Robot, or the Logic Theorist) and write a brief summary of what it accomplished and why it was significant. How does this early work relate to modern AI systems?</p>
+            </div>
+          `,
+          "completed": false
+        },
+        {
+          "id": 3,
+          "title": "Branches and Applications of AI",
+          "content": `
+            <h3>Branches of AI</h3>
+            <p>Artificial Intelligence encompasses several specialized areas, each focusing on different aspects of intelligent behavior.</p>
+            <h4>Main Branches:</h4>
+            <ul>
+              <li><strong>Machine Learning:</strong> Systems that learn from data without explicit programming</li>
+              <li><strong>Natural Language Processing:</strong> Enabling computers to understand and process human language</li>
+              <li><strong>Computer Vision:</strong> Giving computers the ability to interpret and understand visual information</li>
+              <li><strong>Robotics:</strong> Combining AI with physical machines to perform tasks</li>
+              <li><strong>Expert Systems:</strong> Knowledge-based systems that mimic human decision-making</li>
+            </ul>
+            <h4>Interconnected Fields:</h4>
+            <p>These branches often overlap and work together to create more sophisticated AI solutions.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: Branches of AI</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/GlGUTBWaDfc?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>Learn about the different branches and subfields of Artificial Intelligence.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Case Study: AI in Healthcare</h4>
+              <p>Google's DeepMind has developed AI systems that can diagnose eye diseases as accurately as world-leading experts. This system processes optical coherence tomography scans to detect over 50 eye diseases with 94% accuracy.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Application Analysis</h4>
+              <p>Choose one of the AI branches above and find a real-world application in an industry of your choice. Research how it works, what problem it solves, and what benefits it provides. Prepare a short presentation (2-3 minutes) on your findings.</p>
+            </div>
+          `,
+          "completed": false
+        }
+      ],
+      "quiz": {
+        "questions": [
+          {
+            "question": "What does AI stand for?",
+            "options": ["Automatic Intelligence", "Artificial Intelligence", "Advanced Interface", "Automated Internet"],
+            "correct": 1,
+            "explanation": "AI stands for Artificial Intelligence, which refers to systems that perform tasks typically requiring human intelligence."
+          },
+          {
+            "question": "When was the field of AI research formally born?",
+            "options": ["1946", "1956", "1966", "1976"],
+            "correct": 1,
+            "explanation": "The Dartmouth College workshop in 1956 is commonly considered the birth of AI research as an academic discipline."
+          },
+          {
+            "question": "Which of the following is NOT a common AI application?",
+            "options": ["Natural Language Processing", "Computer Vision", "Data Storage", "Robotics"],
+            "correct": 2,
+            "explanation": "While AI systems often process stored data, data storage itself is not an AI application."
+          },
+          {
+            "question": "What is a key ethical concern regarding AI systems?",
+            "options": ["Speed of computation", "Energy consumption", "Bias and fairness", "Hardware cost"],
+            "correct": 2,
+            "explanation": "Ensuring AI systems are fair and don't perpetuate discrimination is a major ethical concern in AI development."
+          }
+        ],
+        "completed": false,
+        "score": 0
+      },
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "AI Ethics and Societal Impact",
+      "lessons": [
+        {
+          "id": 1,
+          "title": "AI Ethics and Societal Impact",
+          "content": `
+            <h3>AI Ethics and Societal Impact</h3>
+            <p>As AI systems become more powerful and pervasive, it's crucial to consider their ethical implications and societal impact.</p>
+            <h4>Key Ethical Issues:</h4>
+            <ul>
+              <li><strong>Bias and Fairness:</strong> Ensuring AI systems don't perpetuate discrimination</li>
+              <li><strong>Privacy:</strong> Protecting personal data used by AI systems</li>
+              <li><strong>Transparency:</strong> Making AI decisions understandable to users</li>
+              <li><strong>Accountability:</strong> Determining responsibility for AI system actions</li>
+              <li><strong>Job Displacement:</strong> Managing the impact on employment</li>
+            </ul>
+            <h4>Responsible AI Development:</h4>
+            <p>Organizations are increasingly focusing on developing AI that is beneficial, fair, and safe for humanity.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: Ethics in AI</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/J2twG6W2TGo?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>Explore the key ethical challenges in AI development and deployment.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Regulatory Landscape</h4>
+              <p>Many countries are developing regulations for AI use. Examples include the EU's proposed AI Act and various national AI strategies. These frameworks aim to promote innovation while protecting citizens' rights.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Ethical Analysis</h4>
+              <p>Choose an AI application you've encountered recently (e.g., social media algorithm, recommendation system, voice assistant). Analyze potential ethical implications and propose ways to address them while maintaining the system's benefits. Consider multiple perspectives in your analysis.</p>
+            </div>
+          `,
+          "completed": false
+        },
+        {
+          "id": 2,
+          "title": "AI in the Real World",
+          "content": `
+            <h3>Modern AI Applications</h3>
+            <p>Today's AI technologies are transforming every aspect of our lives, from how we work to how we interact with technology.</p>
+            <h4>Real-World Applications:</h4>
+            <ul>
+              <li><strong>Healthcare:</strong> Medical diagnosis, drug discovery, personalized treatment</li>
+              <li><strong>Finance:</strong> Fraud detection, algorithmic trading, risk assessment</li>
+              <li><strong>Transportation:</strong> Self-driving cars, route optimization, traffic prediction</li>
+              <li><strong>Retail:</strong> Recommendation systems, inventory management, customer service</li>
+              <li><strong>Manufacturing:</strong> Quality control, predictive maintenance, supply chain optimization</li>
+            </ul>
+            <h4>Future Impact:</h4>
+            <p>Modern AI applications continue to expand, addressing global challenges such as climate change, healthcare accessibility, and resource optimization.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: Modern Applications</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/CiSaY2xl9V4?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>See real-world examples of how AI is being applied across different industries today.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Ethical Frameworks</h4>
+              <p>Organizations like the Partnership on AI and IEEE are developing ethical frameworks to guide the development of responsible AI systems. Principles include fairness, accountability, and transparency.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Industry Exploration</h4>
+              <p>Identify three AI applications in industries that interest you. For each application, describe the problem it solves, the technology behind it, and any potential ethical considerations. Consider both benefits and risks.</p>
+            </div>
+          `,
+          "completed": false
+        },
+        {
+          "id": 3,
+          "title": "AI Safety and Future Considerations",
+          "content": `
+            <h3>AI Safety and Future Considerations</h3>
+            <p>As AI systems become more advanced, ensuring their safety and alignment with human values becomes increasingly important.</p>
+            <h4>AI Safety Research Areas:</h4>
+            <ul>
+              <li><strong>Robustness:</strong> Ensuring AI systems behave reliably in novel situations</li>
+              <li><strong>Fairness:</strong> Preventing AI systems from discriminating against individuals or groups</li>
+              <li><strong>Transparency:</strong> Making AI decision-making processes understandable to humans</li>
+              <li><strong>Aligning goals:</strong> Ensuring AI systems pursue goals aligned with human values</li>
+            </ul>
+            <h4>Long-term Considerations:</h4>
+            <p>Researchers and policymakers are working on frameworks to ensure AI development remains beneficial to humanity as the technology becomes more powerful.</p>
+
+            <div class="video-section">
+              <h4>Recommended Video: AI Safety</h4>
+              <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/SmAUa7s5340?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+              <p>Understand the importance of AI safety research and future considerations.</p>
+            </div>
+
+            <div class="reading-material">
+              <h4>Research Organizations</h4>
+              <p>Institutions like the Future of Life Institute, OpenAI, and DeepMind are actively researching how to develop AI that remains safe and beneficial for humanity as it becomes more advanced.</p>
+            </div>
+
+            <div class="practice-exercise">
+              <h4>Safety Scenario Analysis</h4>
+              <p>Consider a high-stakes AI application (e.g., medical diagnosis, autonomous vehicles, or criminal justice). Identify potential safety risks and propose measures to mitigate them. How would you ensure the AI system behaves reliably and safely in this context?</p>
+            </div>
+          `,
+          "completed": false
+        }
+      ],
+      "quiz": {
+        "questions": [
+          {
+            "question": "True or False: The Dartmouth Conference of 1956 is considered the birth of AI as a field.",
+            "options": ["True", "False"],
+            "correct": 0,
+            "explanation": "The Dartmouth Conference of 1956 is widely recognized as the birth of AI as a field of study."
+          },
+          {
+            "question": "What was significant about Google's DeepMind in healthcare?",
+            "options": ["Created the first medical AI", "Diagnosed eye diseases with 94% accuracy", "Developed new drugs", "Improved surgery robots"],
+            "correct": 1,
+            "explanation": "Google's DeepMind developed AI that can diagnose over 50 eye diseases with 94% accuracy from OCT scans."
+          },
+          {
+            "question": "Personal Reflection: How do you think AI will impact your chosen career field?",
+            "options": ["Will replace many jobs", "Will create new opportunities", "Will require new skills", "All of the above"],
+            "correct": "any",
+            "explanation": "This is a personal reflection question about your perspective on AI's impact on your career."
+          },
+          {
+            "question": "True or False: Ethics in AI primarily concerns the speed of computation.",
+            "options": ["True", "False"],
+            "correct": 1,
+            "explanation": "AI ethics focuses on fairness, privacy, transparency, and accountability, not computational speed."
+          }
+        ],
+        "completed": false,
+        "score": 0
+      },
+      "completed": false
+    }
+  ],
+  "completed": false
+}
