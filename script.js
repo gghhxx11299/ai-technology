@@ -708,11 +708,54 @@ function setupStartLearningButton() {
     }
 }
 
+// Setup FAQ functionality
+function setupFAQ() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+            const answer = this.nextElementSibling;
+            const icon = this.querySelector('i');
+
+            // Toggle the answer visibility
+            answer.classList.toggle('active');
+
+            // Rotate the chevron icon
+            if (answer.classList.contains('active')) {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        });
+    });
+}
+
+// Setup navigation for the home page
+function setupHomeNavigation() {
+    // Set up pricing buttons
+    const pricingButtons = document.querySelectorAll('.pricing-card .cta-button');
+    pricingButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            if (!userData) {
+                showPage('signup');
+            } else {
+                // If user is already logged in, go to dashboard
+                showPage('student-dashboard');
+            }
+        });
+    });
+}
+
 // Courses page setup
 function setupCoursesPage() {
     if (courseData && courseData.modules) {
         updateCoursesDisplay();
     }
+
+    // Setup FAQ for home page if we're on that page
+    setupFAQ();
+    setupHomeNavigation();
 }
 
 function updateCoursesDisplay() {
@@ -779,7 +822,7 @@ function updateCoursesDisplay() {
                     <iframe width="100%" height="150" src="https://www.youtube.com/embed/${previewVideoId}?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="course-actions">
-                    <button class="cta-button primary" onclick="viewCourse(${JSON.stringify(course.allModules).replace(/"/g, '&quot;')})">Start Learning</button>
+                    <button class="cta-button primary" onclick="viewCourse('${courseTitle}')">Start Learning</button>
                 </div>
             </div>
         `;
@@ -789,14 +832,263 @@ function updateCoursesDisplay() {
 }
 
 // Function to view a specific course
-function viewCourse(modules) {
-    if (userData) {
-        // Store course modules in a temporary variable for access in dashboard
-        window.currentCourseModules = modules;
-        showPage('student-dashboard');
-    } else {
+function viewCourse(courseTitle) {
+    if (!userData) {
         // If not logged in, go to signup
         showPage('signup');
+        return;
+    }
+
+    // Find all modules related to this course
+    const courseModules = courseData.modules.filter(module =>
+        module.title.startsWith(courseTitle)
+    );
+
+    if (courseModules.length > 0) {
+        // Set up the course detail page
+        setupCourseDetailPage(courseModules, courseTitle);
+        showPage('course-detail');
+    } else {
+        // Fallback to dashboard if modules not found
+        showPage('student-dashboard');
+    }
+}
+
+// Setup course detail page
+function setupCourseDetailPage(modules, courseTitle) {
+    // Update course header
+    document.getElementById('course-title').textContent = courseTitle;
+    document.getElementById('course-description').textContent = modules[0].description;
+    document.getElementById('course-duration').textContent = modules[0].duration;
+
+    // Calculate course stats
+    let totalLessons = 0;
+    modules.forEach(module => {
+        totalLessons += module.lessons.length;
+    });
+
+    document.getElementById('course-lessons').textContent = totalLessons;
+    document.getElementById('course-quizzes').textContent = modules.length;
+    document.getElementById('course-level').textContent = courseTitle.includes('Fundamentals') ? 'Beginner' :
+                                                         courseTitle.includes('Advanced') ? 'Advanced' : 'Intermediate';
+
+    // Generate course outline
+    const outlineContainer = document.getElementById('course-outline-content');
+    outlineContainer.innerHTML = '';
+
+    modules.forEach((module, moduleIndex) => {
+        const chapterDiv = document.createElement('div');
+        chapterDiv.className = 'chapter-item';
+
+        // Determine if this chapter/lesson is completed
+        const isModuleCompleted = userProgress[module.id] && userProgress[module.id].completed;
+        const chapterIcon = isModuleCompleted ? 'fas fa-check-circle' : 'fas fa-book';
+
+        chapterDiv.innerHTML = `
+            <div class="chapter-title" onclick="selectChapter(${module.id}, ${moduleIndex})">
+                <i class="${chapterIcon}"></i>
+                <span>${module.title}</span>
+            </div>
+            <div class="lesson-list">
+                ${module.lessons.map((lesson, lessonIndex) => {
+                    const isLessonCompleted = userProgress[`${module.id}-${lesson.id}`] &&
+                                              userProgress[`${module.id}-${lesson.id}`].completed;
+                    const lessonIcon = isLessonCompleted ? 'fas fa-check-circle' : 'far fa-circle';
+                    return `
+                        <div class="lesson-item ${isLessonCompleted ? 'completed' : ''}"
+                             onclick="selectLesson(${module.id}, ${lesson.id}, ${moduleIndex}, ${lessonIndex})">
+                            <i class="${lessonIcon}"></i>
+                            <span>${lesson.title}</span>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        `;
+
+        outlineContainer.appendChild(chapterDiv);
+    });
+
+    // Set up instructor info (for demo purposes, using static data)
+    document.getElementById('instructor-name').textContent = "Dr. Alex Johnson";
+    document.getElementById('instructor-bio').textContent = "PhD in Computer Science with 15+ years of experience in AI research and development. Former lead researcher at Google AI.";
+
+    // Update progress
+    updateCourseProgress(modules);
+
+    // Show the first lesson by default
+    if (modules.length > 0 && modules[0].lessons.length > 0) {
+        displayLesson(modules[0].id, modules[0].lessons[0].id);
+        markCurrentLessonActive(modules[0].id, modules[0].lessons[0].id);
+    }
+}
+
+// Update course progress
+function updateCourseProgress(modules) {
+    let totalLessons = 0;
+    let completedLessons = 0;
+
+    modules.forEach(module => {
+        module.lessons.forEach(lesson => {
+            totalLessons++;
+            if (userProgress[`${module.id}-${lesson.id}`] && userProgress[`${module.id}-${lesson.id}`].completed) {
+                completedLessons++;
+            }
+        });
+    });
+
+    const progressPercentage = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+
+    document.getElementById('course-progress-bar').style.width = `${progressPercentage}%`;
+    document.getElementById('course-progress-text').textContent = `${progressPercentage}% Complete`;
+}
+
+// Select and display a chapter
+function selectChapter(moduleId, moduleIndex) {
+    const module = courseData.modules.find(m => m.id === moduleId);
+    if (module && module.lessons.length > 0) {
+        displayLesson(moduleId, module.lessons[0].id);
+        markCurrentLessonActive(moduleId, module.lessons[0].id);
+    }
+}
+
+// Select and display a specific lesson
+function selectLesson(moduleId, lessonId, moduleIndex, lessonIndex) {
+    displayLesson(moduleId, lessonId);
+    markCurrentLessonActive(moduleId, lessonId);
+}
+
+// Mark the current lesson as active in the outline
+function markCurrentLessonActive(moduleId, lessonId) {
+    // Remove active class from all lessons
+    document.querySelectorAll('.lesson-item').forEach(lesson => {
+        lesson.classList.remove('active');
+    });
+
+    // Add active class to the current lesson
+    const activeLesson = document.querySelector(`.lesson-item[onclick="selectLesson(${moduleId}, ${lessonId}, *, *)"]`);
+    if (activeLesson) {
+        activeLesson.classList.add('active');
+    }
+}
+
+// Display lesson content
+function displayLesson(moduleId, lessonId) {
+    const module = courseData.modules.find(m => m.id === moduleId);
+    if (!module) return;
+
+    const lesson = module.lessons.find(l => l.id === lessonId);
+    if (!lesson) return;
+
+    const contentDisplay = document.getElementById('course-content-display');
+    if (contentDisplay) {
+        contentDisplay.innerHTML = lesson.content;
+
+        // Ensure video containers are properly positioned
+        ensureVideoContainersPositioned();
+    }
+
+    // Set up lesson navigation
+    setupLessonNavigation(moduleId, lessonId);
+}
+
+// Set up navigation between lessons
+function setupLessonNavigation(moduleId, lessonId) {
+    const module = courseData.modules.find(m => m.id === moduleId);
+    if (!module) return;
+
+    // Find current lesson index
+    const lessonIndex = module.lessons.findIndex(l => l.id === lessonId);
+    if (lessonIndex === -1) return;
+
+    const prevBtn = document.getElementById('prev-lesson-btn');
+    const nextBtn = document.getElementById('next-lesson-btn');
+    const completeBtn = document.getElementById('complete-lesson-btn');
+
+    // Enable/disable prev button
+    if (prevBtn) {
+        prevBtn.disabled = (lessonIndex === 0);
+        prevBtn.onclick = () => {
+            if (lessonIndex > 0) {
+                displayLesson(moduleId, module.lessons[lessonIndex - 1].id);
+                markCurrentLessonActive(moduleId, module.lessons[lessonIndex - 1].id);
+            }
+        };
+    }
+
+    // Enable/disable next button
+    if (nextBtn) {
+        nextBtn.disabled = (lessonIndex === module.lessons.length - 1);
+        nextBtn.onclick = () => {
+            if (lessonIndex < module.lessons.length - 1) {
+                displayLesson(moduleId, module.lessons[lessonIndex + 1].id);
+                markCurrentLessonActive(moduleId, module.lessons[lessonIndex + 1].id);
+            }
+        };
+    }
+
+    // Set up complete button
+    if (completeBtn) {
+        const isCompleted = userProgress[`${moduleId}-${lessonId}`] &&
+                           userProgress[`${moduleId}-${lessonId}`].completed;
+
+        completeBtn.textContent = isCompleted ? 'Completed' : 'Mark Complete';
+        completeBtn.disabled = isCompleted;
+
+        completeBtn.onclick = () => {
+            // Mark lesson as completed
+            userProgress[`${moduleId}-${lessonId}`] = {
+                completed: true,
+                date: new Date().toISOString()
+            };
+
+            saveData();
+
+            // Update UI
+            completeBtn.textContent = 'Completed';
+            completeBtn.disabled = true;
+
+            // Update progress display
+            const modules = courseData.modules.filter(m => m.title.startsWith(module.title.split(' - ')[0]));
+            updateCourseProgress(modules);
+
+            // Check if this completes the module
+            const module = courseData.modules.find(m => m.id === moduleId);
+            if (module) {
+                const allLessonsCompleted = module.lessons.every(lesson =>
+                    userProgress[`${moduleId}-${lesson.id}`] &&
+                    userProgress[`${moduleId}-${lesson.id}`].completed
+                );
+
+                if (allLessonsCompleted) {
+                    userProgress[moduleId] = {
+                        completed: true,
+                        date: new Date().toISOString()
+                    };
+
+                    // Check if all modules are completed for certificate
+                    const courseTitle = module.title.split(' - ')[0];
+                    const courseModules = courseData.modules.filter(m =>
+                        m.title.startsWith(courseTitle)
+                    );
+
+                    const allModulesCompleted = courseModules.every(m =>
+                        userProgress[m.id] && userProgress[m.id].completed
+                    );
+
+                    if (allModulesCompleted) {
+                        showCertificate();
+                    }
+
+                    saveData();
+
+                    // Refresh the outline to show completion
+                    const modules = courseData.modules.filter(m =>
+                        m.title.startsWith(module.title.split(' - ')[0])
+                    );
+                    setupCourseDetailPage(modules, courseTitle);
+                }
+            }
+        };
     }
 }
 
@@ -805,10 +1097,372 @@ function updateRecentActivity() {
     // Update recent activity section on dashboard
 }
 
+// Update the module detail view function to be more comprehensive
+function setupModuleDetailView() {
+    // Set up back to dashboard button
+    const backBtn = document.getElementById('back-to-dashboard');
+    if (backBtn) {
+        backBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showPage('student-dashboard');
+        });
+    }
+
+    // Set up navigation buttons
+    const prevLessonBtn = document.getElementById('prev-lesson');
+    const nextLessonBtn = document.getElementById('next-lesson');
+    const completeLessonBtn = document.getElementById('complete-lesson');
+
+    if (prevLessonBtn) {
+        prevLessonBtn.addEventListener('click', function() {
+            // Logic to go to previous lesson
+            console.log('Previous lesson clicked');
+        });
+    }
+
+    if (nextLessonBtn) {
+        nextLessonBtn.addEventListener('click', function() {
+            // Logic to go to next lesson
+            console.log('Next lesson clicked');
+        });
+    }
+
+    if (completeLessonBtn) {
+        completeLessonBtn.addEventListener('click', function() {
+            // Logic to mark lesson as complete
+            console.log('Complete lesson clicked');
+        });
+    }
+
+    // Set up section buttons
+    const resourcesBtn = document.getElementById('show-resources');
+    const discussionBtn = document.getElementById('show-discussion');
+    const notesBtn = document.getElementById('show-notes');
+    const bookmarksBtn = document.getElementById('show-bookmarks');
+
+    if (resourcesBtn) {
+        resourcesBtn.addEventListener('click', function() {
+            document.querySelectorAll('#resources-section, #discussion-section, #notes-section, #bookmarks-section, #lesson-content').forEach(el => {
+                if (el) el.style.display = 'none';
+            });
+            const resourcesSection = document.getElementById('resources-section');
+            if (resourcesSection) resourcesSection.style.display = 'block';
+        });
+    }
+
+    if (discussionBtn) {
+        discussionBtn.addEventListener('click', function() {
+            document.querySelectorAll('#resources-section, #discussion-section, #notes-section, #bookmarks-section, #lesson-content').forEach(el => {
+                if (el) el.style.display = 'none';
+            });
+            const discussionSection = document.getElementById('discussion-section');
+            if (discussionSection) discussionSection.style.display = 'block';
+        });
+    }
+
+    if (notesBtn) {
+        notesBtn.addEventListener('click', function() {
+            document.querySelectorAll('#resources-section, #discussion-section, #notes-section, #bookmarks-section, #lesson-content').forEach(el => {
+                if (el) el.style.display = 'none';
+            });
+            const notesSection = document.getElementById('notes-section');
+            if (notesSection) notesSection.style.display = 'block';
+        });
+    }
+
+    if (bookmarksBtn) {
+        bookmarksBtn.addEventListener('click', function() {
+            document.querySelectorAll('#resources-section, #discussion-section, #notes-section, #bookmarks-section, #lesson-content').forEach(el => {
+                if (el) el.style.display = 'none';
+            });
+            const bookmarksSection = document.getElementById('bookmarks-section');
+            if (bookmarksSection) bookmarksSection.style.display = 'block';
+        });
+    }
+}
+
+// Enhanced dashboard setup
+function setupStudentDashboard() {
+    if (userData && !userData.isAdmin) {
+        const userGreeting = document.querySelector('.user-greeting h2');
+        if (userGreeting) {
+            userGreeting.innerHTML = `Welcome back, <span>${userData.name}</span>`;
+        }
+
+        updateProgressOverview();
+        updateCourseSections();
+        updateRecentActivity();
+    }
+}
+
+// Enhanced progress overview
+function updateProgressOverview() {
+    // Calculate overall progress
+    const totalModules = courseData.modules.length;
+    const totalLessons = courseData.modules.reduce((total, module) => {
+        return total + module.lessons.length;
+    }, 0);
+
+    const completedModules = courseData.modules.filter(module =>
+        userProgress[module.id] && userProgress[module.id].completed
+    ).length;
+
+    const completedLessons = Object.keys(userProgress).filter(key => {
+        return userProgress[key].completed && !key.includes('-quiz');
+    }).length;
+
+    const completionPercentage = totalLessons > 0 ?
+        Math.round((completedLessons / totalLessons) * 100) : 0;
+
+    // Update progress bar
+    const progressFill = document.querySelector('.progress-fill');
+    const progressText = document.querySelector('.progress-text');
+
+    if (progressFill) progressFill.style.width = `${completionPercentage}%`;
+    if (progressText) progressText.textContent = `${completionPercentage}% Complete`;
+
+    // Update stat cards
+    const statElements = document.querySelectorAll('.stat-card');
+    if (statElements[0]) {
+        statElements[0].querySelector('.stat-info h4').textContent = `${completedModules}`;
+        statElements[0].querySelector('.stat-info p').textContent = 'Modules Completed';
+    }
+
+    if (statElements[1]) {
+        statElements[1].querySelector('.stat-info h4').textContent = `${completedLessons}`;
+        statElements[1].querySelector('.stat-info p').textContent = 'Lessons Completed';
+    }
+
+    if (statElements[2]) {
+        const completedQuizzes = Object.keys(userProgress).filter(key =>
+            key.includes('-quiz') && userProgress[key].completed
+        ).length;
+        statElements[2].querySelector('.stat-info h4').textContent = `${completedQuizzes}`;
+        statElements[2].querySelector('.stat-info p').textContent = 'Quizzes Passed';
+    }
+}
+
+// Enhanced course sections
+function updateCourseSections() {
+    const courseSections = document.querySelector('.course-sections');
+    if (!courseSections || !courseData.modules) return;
+
+    courseSections.innerHTML = '';
+
+    // Group modules by course
+    const uniqueCourses = {};
+    courseData.modules.forEach(module => {
+        const courseTitle = module.title.split(' - ')[0];
+
+        if (!uniqueCourses[courseTitle]) {
+            uniqueCourses[courseTitle] = {
+                title: courseTitle,
+                modules: []
+            };
+        }
+
+        uniqueCourses[courseTitle].modules.push(module);
+    });
+
+    // Create course groupings
+    Object.keys(uniqueCourses).forEach(courseTitle => {
+        const courseGroup = uniqueCourses[courseTitle];
+
+        const courseGroupDiv = document.createElement('div');
+        courseGroupDiv.className = 'course-group';
+        courseGroupDiv.innerHTML = `<h3 class="section-header">${courseTitle}</h3>`;
+
+        const modulesContainer = document.createElement('div');
+
+        courseGroup.modules.forEach(module => {
+            const completedLessons = module.lessons.filter(lesson =>
+                userProgress[`${module.id}-${lesson.id}`]
+            ).length;
+
+            const progressPercentage = Math.round((completedLessons / module.lessons.length) * 100);
+
+            const moduleCard = document.createElement('div');
+            moduleCard.className = 'module-card';
+
+            // Check if module has quiz and if it's completed
+            const quizCompleted = userProgress[`${module.id}-quiz`] && userProgress[`${module.id}-quiz`].completed;
+
+            moduleCard.innerHTML = `
+                <div class="module-header" onclick="toggleModule(${module.id})">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <h3 class="module-title">${module.title.split(' - ')[1] || module.title}</h3>
+                        ${quizCompleted ? '<i class="fas fa-check-circle" style="color: #27ae60;"></i>' : ''}
+                    </div>
+                    <span class="module-expand"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="module-body" id="module-body-${module.id}">
+                    <div class="lesson-list">
+                        ${module.lessons.map(lesson => {
+                            const lessonStatus = userProgress[`${module.id}-${lesson.id}`] ?
+                                (userProgress[`${module.id}-${lesson.id}`].completed ? 'completed' : 'in-progress') :
+                                'incomplete';
+
+                            return `
+                                <div class="lesson-item">
+                                    <h4 class="lesson-title">${lesson.title}</h4>
+                                    <span class="lesson-status ${lessonStatus}">${getStatusText(lessonStatus)}</span>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+
+                    <div class="module-actions">
+                        <button class="cta-button secondary" onclick="viewModule(${module.id})">
+                            ${completedLessons === module.lessons.length ? 'Review Module' : 'Continue Learning'}
+                        </button>
+
+                        ${module.quiz ? `
+                            <button class="cta-button ${userProgress[`${module.id}-quiz`] ? 'secondary' : 'primary'}"
+                                    onclick="takeQuiz(${module.id})">
+                                ${userProgress[`${module.id}-quiz`] ? 'Review Quiz' : 'Take Quiz'}
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+
+            modulesContainer.appendChild(moduleCard);
+        });
+
+        courseGroupDiv.appendChild(modulesContainer);
+        courseSections.appendChild(courseGroupDiv);
+    });
+}
+
+// Enhanced view module function
+function viewModule(moduleId) {
+    // Find the module in courseData
+    const module = courseData.modules.find(m => m.id === moduleId);
+    if (!module) return;
+
+    // Update module detail view
+    showPage('module-detail');
+
+    // Update module detail content
+    const moduleTitle = document.getElementById('module-title');
+    const lessonList = document.getElementById('lesson-list');
+
+    if (moduleTitle) {
+        moduleTitle.textContent = module.title;
+    }
+
+    if (lessonList) {
+        lessonList.innerHTML = module.lessons.map((lesson, index) => {
+            const lessonStatus = userProgress[`${moduleId}-${lesson.id}`] ?
+                (userProgress[`${moduleId}-${lesson.id}`].completed ? 'completed' : 'in-progress') :
+                'incomplete';
+
+            return `
+                <div class="lesson-item">
+                    <h4 class="lesson-title">${lesson.title}</h4>
+                    <span class="lesson-status ${lessonStatus}">${getStatusText(lessonStatus)}</span>
+                    <button class="cta-button secondary" onclick="viewLesson(${moduleId}, ${lesson.id})">
+                        ${lessonStatus === 'completed' ? 'Review' : 'Start'}
+                    </button>
+                </div>
+            `;
+        }).join('');
+    }
+}
+
+// Enhanced view lesson function
+function viewLesson(moduleId, lessonId) {
+    // Find the lesson in course data
+    const module = courseData.modules.find(m => m.id === moduleId);
+    const lesson = module ? module.lessons.find(l => l.id === lessonId) : null;
+
+    if (lesson) {
+        // Use the course detail page instead of module detail for better UX
+        setupCourseDetailPage([module], module.title.split(' - ')[0]);
+        showPage('course-detail');
+
+        // Display the specific lesson
+        displayLesson(moduleId, lessonId);
+        markCurrentLessonActive(moduleId, lessonId);
+    }
+}
+
+// Enhanced admin dashboard
+function setupAdminDashboard() {
+    if (userData && userData.isAdmin) {
+        document.getElementById('admin-link').style.display = 'flex';
+
+        // Set up admin tabs
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+
+                // Update active tab button
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+
+                // Show the selected tab content
+                document.querySelectorAll('.tab-pane').forEach(pane => {
+                    pane.classList.remove('active');
+                });
+                const targetPane = document.getElementById(`${tabId}-tab`);
+                if (targetPane) targetPane.classList.add('active');
+            });
+        });
+    }
+}
+
+// Enhanced certificate view
+function setupCertificateView() {
+    const downloadBtn = document.getElementById('download-certificate');
+    const shareBtn = document.getElementById('share-certificate');
+
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', function() {
+            // In a real implementation, this would generate a PDF
+            alert('Certificate download would start in a real implementation. For now, you can take a screenshot.');
+        });
+    }
+
+    if (shareBtn) {
+        shareBtn.addEventListener('click', function() {
+            // In a real implementation, this would share to social media
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My AI Course Certificate',
+                    text: 'I just completed an AI course at AI Mastery Academy!',
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                alert('Web Share API not supported in your browser. Certificate URL copied to clipboard.');
+                navigator.clipboard.writeText(window.location.href);
+            }
+        });
+    }
+}
+
 // Ensure video containers are properly positioned after content is loaded
 function ensureVideoContainersPositioned() {
     // Wait a brief moment to ensure the DOM is updated
     setTimeout(function() {
+        const videoContainers = document.querySelectorAll('.video-container');
+        videoContainers.forEach(function(container) {
+            // The CSS should handle this, but let's make sure the iframe is properly positioned
+            const iframe = container.querySelector('iframe');
+            if (iframe) {
+                // Make sure the iframe is positioned absolutely within its container
+                iframe.style.position = 'absolute';
+                iframe.style.top = '0';
+                iframe.style.left = '0';
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+            }
+        });
+    }, 100); // Small delay to ensure DOM is rendered
+}
         const videoContainers = document.querySelectorAll('.video-container');
         videoContainers.forEach(function(container) {
             // The CSS should handle this, but let's make sure the iframe is properly positioned
