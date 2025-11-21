@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up courses page
     setupCoursesPage();
 
+    // Set up start learning button
+    setupStartLearningButton();
+
     // Check current authentication status
     checkAuthStatus();
 });
@@ -689,9 +692,112 @@ function setupCertificateView() {
     // Certificate view setup would go here
 }
 
+// Set up the "Start Learning" button
+function setupStartLearningButton() {
+    const getStartedBtn = document.getElementById('get-started-btn');
+    if (getStartedBtn) {
+        getStartedBtn.addEventListener('click', function() {
+            if (userData) {
+                // If user is logged in, go to dashboard
+                showPage('student-dashboard');
+            } else {
+                // If not logged in, go to signup
+                showPage('signup');
+            }
+        });
+    }
+}
+
 // Courses page setup
 function setupCoursesPage() {
-    // Courses page setup would go here
+    if (courseData && courseData.modules) {
+        updateCoursesDisplay();
+    }
+}
+
+function updateCoursesDisplay() {
+    const coursesGrid = document.querySelector('.courses-grid');
+    if (!coursesGrid || !courseData.modules) return;
+
+    // Group modules by unique courses (since we have multiple modules per course)
+    const uniqueCourses = {};
+    courseData.modules.forEach(module => {
+        // Extract course title from module title (first part before the dash)
+        const courseTitle = module.title.split(' - ')[0];
+
+        if (!uniqueCourses[courseTitle]) {
+            uniqueCourses[courseTitle] = {
+                title: courseTitle,
+                description: module.description.split(' - ')[0], // Get course description
+                duration: module.duration,
+                modules: [],
+                allModules: []
+            };
+        }
+
+        uniqueCourses[courseTitle].allModules.push(module);
+    });
+
+    // Process to get 2 modules per course as "chapters"
+    Object.keys(uniqueCourses).forEach(courseTitle => {
+        const course = uniqueCourses[courseTitle];
+        // Take first 2 modules as the main chapters for the course display
+        course.modules = course.allModules.slice(0, 2);
+    });
+
+    coursesGrid.innerHTML = '';
+
+    Object.keys(uniqueCourses).forEach(courseTitle => {
+        const course = uniqueCourses[courseTitle];
+
+        // Use the first module's lesson as the preview
+        const firstLesson = course.allModules[0] && course.allModules[0].lessons[0];
+        let previewVideoId = 'ad79nYk2keg'; // Default video
+
+        // Extract YouTube video ID from first lesson if it exists
+        if (firstLesson && firstLesson.content.includes('youtube.com/embed/')) {
+            const match = firstLesson.content.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/);
+            if (match && match[1]) {
+                previewVideoId = match[1];
+            }
+        }
+
+        const courseCard = document.createElement('div');
+        courseCard.className = 'course-card';
+        courseCard.innerHTML = `
+            <div class="course-image">
+                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="${courseTitle}">
+            </div>
+            <div class="course-info">
+                <h3>${courseTitle}</h3>
+                <p>${course.description}</p>
+                <div class="course-meta">
+                    <span><i class="fas fa-book"></i> ${course.modules.length} Chapters</span>
+                    <span><i class="fas fa-clock"></i> ${course.duration}</span>
+                </div>
+                <div class="course-preview">
+                    <iframe width="100%" height="150" src="https://www.youtube.com/embed/${previewVideoId}?rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="course-actions">
+                    <button class="cta-button primary" onclick="viewCourse(${JSON.stringify(course.allModules).replace(/"/g, '&quot;')})">Start Learning</button>
+                </div>
+            </div>
+        `;
+
+        coursesGrid.appendChild(courseCard);
+    });
+}
+
+// Function to view a specific course
+function viewCourse(modules) {
+    if (userData) {
+        // Store course modules in a temporary variable for access in dashboard
+        window.currentCourseModules = modules;
+        showPage('student-dashboard');
+    } else {
+        // If not logged in, go to signup
+        showPage('signup');
+    }
 }
 
 // Recent activity (placeholder)
